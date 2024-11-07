@@ -1,4 +1,7 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import {FormControl} from '@angular/forms';
+CommonModule
 
 @Component({
   selector: 'app-login',
