@@ -5,27 +5,20 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { Router} from '@angular/router';
 
-
 @Component({
-  selector: 'app-login',
+  selector: 'app-form-cuenta',
   standalone: true,
   imports: [
     CommonModule,
     FormsModule,
-   
   ],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  templateUrl: './form-cuenta.component.html',
+  styleUrl: './form-cuenta.component.scss'
 })
-export class LoginComponent {
+export class FormCuentaComponent {
   private router=inject(Router);
   constructor(){}
-  
   createAccount(){}
   onSubmit(){}
-  irCrearCuenta(){
-    this.router.navigate(['/crear-cuenta']);
-  }
-  
-  
+
 }

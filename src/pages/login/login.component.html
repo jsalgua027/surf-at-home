@@ -1,4 +1,4 @@
-<div class="login-container">
+<div class="form-login">
 
   <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
     <div class="form-group">
@@ -10,7 +10,7 @@
       <input type="password" id="password" name="password" ngModel required class="form-control" />
     </div>
     <button type="button" class="btn btn-primary">Entrar</button>
-    <button type="button" class="btn btn-secondary" (click)="createAccount()">
+    <button type="button" class="btn btn-secondary black-button" (click)="irCrearCuenta()">
       Crear Cuenta
     </button>
   </form>

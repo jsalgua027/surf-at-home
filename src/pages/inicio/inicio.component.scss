@@ -1,0 +1,38 @@
+nav ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    /* Para que las imágenes se ajusten y no se solapen */
+    justify-content: space-around;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    margin: 10px;
+}
+
+/* Tamaño de Imagenes */
+.inicio-pages img {
+    width: 100%;
+    height: auto;
+}
+
+/*h2 dentro de las imagenes*/
+.categoria-inicio {
+    position: absolute;
+    bottom: 5px;
+    left: 75%;
+    transform: translateX(-50%);
+    color: black;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 25px;
+    z-index: 1;
+}
+
+/* Para que el h2 sea relativo al contenedor .inicio-pages */
+.inicio-pages {
+    position: relative;
+}
