@@ -11,9 +11,11 @@ export class ProductoService {
     }
 
 
-    searchProducts(term: string): Observable<Producto[]> { if (!term.trim()) { // Si el término de búsqueda está vacío, devuelve todos los productos
-         return of(PRODUCTOS_MOCK);
-        } 
-        const productosFiltrados = PRODUCTOS_MOCK.filter(producto => producto.descripcion.toLowerCase().includes(term.toLowerCase()) );
-         return of(productosFiltrados); }
+    searchProducts(term: string): Observable<Producto[]> {
+        if (!term.trim()) { // Si el término de búsqueda está vacío, devuelve todos los productos
+            return of(PRODUCTOS_MOCK);
+        }
+        const productosFiltrados = PRODUCTOS_MOCK.filter(producto => producto.descripcion.toLowerCase().includes(term.toLowerCase()));
+        return of(productosFiltrados);
+    }
 }
