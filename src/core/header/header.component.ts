@@ -50,8 +50,8 @@ constructor(){}
 		}
 	}
 
-	openBottom(carrito: TemplateRef<any>) {
-		this.offcanvasService.open(carrito, { position: 'bottom' });
+	openEnd(carrito: TemplateRef<any>) {
+		this.offcanvasService.open(carrito, { position: 'end' });
 	}
 
 

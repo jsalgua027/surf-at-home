@@ -75,30 +75,6 @@ ul li button {
 }
 
 
-/*offcanvas-body*/
-.offcanvas-title {
-    text-align: center;
-}
-
-.offcanvas-body {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    height: 100vh;
-    /* Asegurarse de que ocupe toda la altura de la ventana */
-}
-
-body>div.offcanvas-body>ul {
-    list-style: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    /* Alinear los elementos en una columna */
-    gap: 10px !important;
-    /* Espacio entre filas */
-}
-
 
 
 .letras-side {
