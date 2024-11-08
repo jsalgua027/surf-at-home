@@ -1,11 +1,19 @@
-<div> <input type="text" [formControl]="searchTerm" placeholder="Buscar productos..." /> </div>
+<div class="buscador-container">
+    <input type="text" [formControl]="searchTerm" placeholder="Buscar productos..." />
+</div>
 <div *ngIf="filteredProducts.length > 0; else noProductos">
-    <div *ngFor="let producto of filteredProducts">
-        <div class="producto-card"> <img [src]="producto.foto_producto" alt="{{ producto.descripcion }}" />
-            <h3>{{ producto.marca_producto }}</h3>
-            <p>{{ producto.descripcion }}</p> <span>{{ producto.precio | currency }}</span>
+    <div class="producto-grid">
+        <div *ngFor="let producto of filteredProducts" class="card">
+            <img [src]="producto.foto_producto" alt="{{ producto.descripcion }}" class="card-img-top" />
+            <div class="card-body">
+                <h5 class="card-title">{{ producto.marca_producto }}</h5>
+                <p class="card-text">{{ producto.descripcion }}</p>
+                <p class="card-price">{{ producto.precio | currency }}</p>
+                <button (click)="agregarAlCarrito(producto)" class="btn btn-primary">Añadir al Carrito</button>
+            </div>
         </div>
     </div>
-</div> <ng-template #noProductos>
+</div>
+<ng-template #noProductos>
     <p>No hay productos disponibles para esta categoría.</p>
 </ng-template>
