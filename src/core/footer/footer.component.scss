@@ -4,6 +4,9 @@ footer {
     position: relative;
     width: 100%;
     padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .boton-side {
@@ -17,4 +20,38 @@ footer {
     /* Inherita el color del texto */
     cursor: pointer;
     /* Opcional, para mantener el comportamiento de clic */
+}
+
+
+
+.horarios{
+    width: 45%;
+    display: flex;
+   margin: 8px;
+}
+.info{
+    width:45%;
+    margin: 8px;
+}
+
+.email{
+    display: flex;
+    justify-content: center;
+  
+}
+.telefono{
+    display: flex;
+    justify-content: center;
+}
+.elementos-footer{
+    margin: 5px;
+}
+.redes-sociales{
+        width: 100%;
+        display: flex;
+      justify-content: center;
+      
+}
+.redes-sociales>div>img{
+    margin: 10px;
 }
