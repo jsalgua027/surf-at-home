@@ -16,7 +16,8 @@ nav ul li {
 /* Tamaño de Imagenes */
 .inicio-pages img {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
 }
 
 /*h2 dentro de las imagenes*/
@@ -34,5 +35,27 @@ nav ul li {
 
 /* Para que el h2 sea relativo al contenedor .inicio-pages */
 .inicio-pages {
+    width: 100%;
+    /* Ajustar al ancho del contenedor */
+    height: 300px;
+    /* Altura fija para todas las imágenes */
     position: relative;
+    overflow: hidden;
+    /* Ocultar cualquier desbordamiento */
+}
+
+/* Media query para pantallas grandes */
+@media (min-width: 1200px) {
+    nav ul {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        /* Dos columnas */
+        gap: 10px;
+        /* Espacio entre las columnas */
+    }
+
+    nav ul li {
+        // margin: 10px;
+        /* Ajustar el margen para el layout de grid */
+    }
 }

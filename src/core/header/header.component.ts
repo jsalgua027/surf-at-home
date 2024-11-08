@@ -1,5 +1,6 @@
 import { Component ,inject, TemplateRef} from '@angular/core';
 import { NgbDatepickerModule, NgbOffcanvas, OffcanvasDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { Router} from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -11,8 +12,21 @@ import { NgbDatepickerModule, NgbOffcanvas, OffcanvasDismissReasons } from '@ng-
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
+
   private offcanvasService = inject(NgbOffcanvas);
+  private router=inject(Router);
 	closeResult = '';
+
+constructor(){}
+
+/*Enrutamiento de la cabecera y el menu offcanvas*/
+	irALogin(){
+		this.router.navigate(['/login']);
+	  }
+
+	  irAInicio(){
+		this.router.navigate(['/']);
+	  }
 
   open(content: TemplateRef<any>) {
 		this.offcanvasService.open(content, { ariaLabelledBy: 'offcanvas-basic-title' }).result.then(

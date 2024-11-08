@@ -1,0 +1,11 @@
+<div> <input type="text" [formControl]="searchTerm" placeholder="Buscar productos..." /> </div>
+<div *ngIf="filteredProducts.length > 0; else noProductos">
+    <div *ngFor="let producto of filteredProducts">
+        <div class="producto-card"> <img [src]="producto.foto_producto" alt="{{ producto.descripcion }}" />
+            <h3>{{ producto.marca_producto }}</h3>
+            <p>{{ producto.descripcion }}</p> <span>{{ producto.precio | currency }}</span>
+        </div>
+    </div>
+</div> <ng-template #noProductos>
+    <p>No hay productos disponibles para esta categoría.</p>
+</ng-template>

@@ -11,7 +11,7 @@
             <h2>SURF AT HOME</h2>
         </li>
         <li className="login">
-            <button>
+            <button (click)="irALogin()">
 
                 <img src="../../assets/icons/Login.svg" alt="Login" />
 
@@ -37,7 +37,7 @@
         <div class="offcanvas-body">
             <ul className="menu-container">
                 <li className="letras-side"> <button className="boton-side"
-                        (click)="offcanvas.dismiss('Cross click')">INICIO</button></li>
+                        (click)="offcanvas.dismiss('Cross click'); irAInicio()">INICIO</button></li>
                 <li className="letras-side"><button className="boton-side"
                         (click)="offcanvas.dismiss('Cross click')">SURF</button></li>
 

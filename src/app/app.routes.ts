@@ -2,11 +2,12 @@ import {RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from '../pages/login/login.component';
 import { FormCuentaComponent } from '../pages/form-cuenta/form-cuenta.component';
 import { InicioComponent } from '../pages/inicio/inicio.component';
-InicioComponent
+import { ProductosComponent } from '../pages/productos/productos.component';
+
 
 
 export const routes: Routes = [
-    
+
     {
         path:'',
         component:InicioComponent
@@ -19,6 +20,11 @@ export const routes: Routes = [
     {
         path:'crear-cuenta',
         component:FormCuentaComponent
+
+    },
+    {
+        path:'productos/:idCategoria',
+        component:ProductosComponent
 
     },
     

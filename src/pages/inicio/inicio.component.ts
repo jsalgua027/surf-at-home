@@ -12,5 +12,8 @@ import { Router} from '@angular/router';
   styleUrl: './inicio.component.scss'
 })
 export class InicioComponent {
-constructor(){}
+ // categoriaSeleccionada: number = 1;
+constructor(private router: Router){}
+
+irAProductos(idCategoria: number) { this.router.navigate(['/productos', idCategoria]); }
 }
