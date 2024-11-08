@@ -18,7 +18,7 @@
             </button>
         </li>
         <li className="carro">
-            <button>
+            <button (click)="openBottom(carrito)">
                 <img src="../../assets/icons/Carro.svg" alt="Carro" />
             </button>
         </li>
@@ -52,6 +52,21 @@
                 <img class="logo" src="../../assets/logos/Logo1.png" alt="Logo de la tienda del menú" />
             </div>
 
+        </div>
+    </ng-template>
+
+    <ng-template #carrito let-offcanvas>
+        <div class="offcanvas-header custom-offcanvas">
+            <h4 class="offcanvas-title">CARRITO DE COMPRAS</h4>
+            <button type="button" class="btn-close" aria-label="Close"
+                (click)="offcanvas.dismiss('Cross click')"></button>
+        </div>
+        <div class="offcanvas-body  custom-offcanvas-body">
+            <p>One fine body&hellip;</p>
+            <div class="text-end">
+                <button type="button" class="btn btn-outline-secondary"
+                    (click)="offcanvas.close('Close click')">Close</button>
+            </div>
         </div>
     </ng-template>
 

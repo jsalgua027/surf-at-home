@@ -50,6 +50,10 @@ constructor(){}
 		}
 	}
 
+	openBottom(carrito: TemplateRef<any>) {
+		this.offcanvasService.open(carrito, { position: 'bottom' });
+	}
+
 
 
 
