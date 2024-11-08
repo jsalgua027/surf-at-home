@@ -1,1 +1,58 @@
-<p>header works!</p>
+<header>
+
+    <ul>
+        <li>
+            <button className="hamburger" (click)="open(content)">
+                &#9776;
+            </button>
+        </li>
+        <li className="logo-header">
+            <!--<img src="/images/logos/Logo1.png" alt="Logo de la tienda del menú" />-->
+            <h2>SURF AT HOME</h2>
+        </li>
+        <li className="login">
+            <button>
+
+                <img src="../../assets/icons/Login.svg" alt="Login" />
+
+            </button>
+        </li>
+        <li className="carro">
+            <button>
+                <img src="../../assets/icons/Carro.svg" alt="Carro" />
+            </button>
+        </li>
+        <li className="loginOut">
+            <button>
+                <img src="/assets/icons/LogOut.svg" alt="logout" />
+            </button>
+        </li>
+    </ul>
+    <ng-template #content let-offcanvas>
+        <div class="offcanvas-header">
+            <h3 class="offcanvas-title" id="offcanvas-basic-title">SURF AT HOME</h3>
+            <button type="button" class="btn-close" aria-label="Close"
+                (click)="offcanvas.dismiss('Cross click')"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul className="menu-container">
+                <li className="letras-side"> <button className="boton-side"
+                        (click)="offcanvas.dismiss('Cross click')">INICIO</button></li>
+                <li className="letras-side"><button className="boton-side"
+                        (click)="offcanvas.dismiss('Cross click')">SURF</button></li>
+
+                <li className="letras-side"> <button className="boton-side"
+                        (click)="offcanvas.dismiss('Cross click')">BODYBOARD</button></li>
+                <li className="letras-side"> <button className="boton-side"
+                        (click)="offcanvas.dismiss('Cross click')">SKATE</button></li>
+                <li className="letras-side"><button className="boton-side"
+                        (click)="offcanvas.dismiss('Cross click')">NEOPRENOS</button></li>
+            </ul>
+            <div className="logo-menu">
+                <img class="logo" src="../../assets/logos/Logo1.png" alt="Logo de la tienda del menú" />
+            </div>
+
+        </div>
+    </ng-template>
+
+</header>

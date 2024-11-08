@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component ,inject, TemplateRef} from '@angular/core';
 
 @Component({
   selector: 'app-footer',

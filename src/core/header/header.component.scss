@@ -1,0 +1,135 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 10px;
+    border-bottom: 5px solid #02799A;
+    height: 80px
+}
+
+ul {
+    display: flex;
+    flex-direction: row;
+    /* Asegura el alineamiento horizontal */
+    align-items: center;
+    justify-content: space-between;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+
+
+.hamburger,
+.login,
+.carro,
+.loginOut {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    font-size: 25px;
+    color: #02799A;
+
+}
+
+/*Ajusto el tamaño de los logos*/
+.login img,
+.carro img,
+.loginOut img {
+    width: 30px;
+    height: auto;
+}
+
+.logo-header {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    color: #02799A;
+    font-size: 20px;
+}
+
+
+.logo-header img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Ajusta la imagen del logo para que se mantenga alineada */
+.logo-header img {
+    width: 100px;
+    /* Ajusta este valor según necesites */
+    height: auto;
+}
+
+ul li button {
+    background: none;
+    border: none;
+    color: #02799A;
+    font-size: 24px;
+}
+
+
+/*offcanvas-body*/
+.offcanvas-title {
+    text-align: center;
+}
+
+.offcanvas-body {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    height: 100vh;
+    /* Asegurarse de que ocupe toda la altura de la ventana */
+}
+
+body>div.offcanvas-body>ul {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    /* Alinear los elementos en una columna */
+    gap: 10px !important;
+    /* Espacio entre filas */
+}
+
+
+
+.letras-side {
+    color: #02799A;
+    margin-bottom: 10px;
+}
+
+.boton-side {
+    display: block;
+    /* Asegurar que el botón ocupe todo el ancho disponible */
+    width: 100%;
+    text-align: left;
+    /* Alinear el texto a la izquierda */
+    padding: 10px;
+    /* Añadir padding para mejor apariencia */
+}
+
+.logo-menu {
+    display: flex;
+    justify-content: center;
+
+    /* Centrar el logo si es necesario */
+    margin-top: 50px;
+    /* Ajusta el margen superior para separar el logo de los elementos de la lista */
+}
+
+.logo {
+    width: 400px;
+    /* Ajusta el ancho del logo */
+    height: 400px;
+    /* Mantén la proporción del logo */
+    max-width: 100%;
+    /* Asegura que el logo no exceda el tamaño del contenedor */
+}
