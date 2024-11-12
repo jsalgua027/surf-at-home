@@ -57,7 +57,12 @@ export class HeaderComponent implements OnInit {
 	irAInicio() {
 		this.router.navigate(['/']);
 	}
+	
+	irAProductos(idCategoria: number) {
+		 this.router.navigate(['/productos', idCategoria]);
+		 }
 
+	
 	open(content: TemplateRef<any>) {
 		this.offcanvasService.open(content, { ariaLabelledBy: 'offcanvas-basic-title' }).result.then(
 			(result) => {

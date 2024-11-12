@@ -39,14 +39,14 @@
                 <li className="letras-side"> <button className="boton-side"
                         (click)="offcanvas.dismiss('Cross click'); irAInicio()">INICIO</button></li>
                 <li className="letras-side"><button className="boton-side"
-                        (click)="offcanvas.dismiss('Cross click')">SURF</button></li>
+                        (click)="offcanvas.dismiss('Cross click');irAProductos(1)">SURF</button></li>
 
                 <li className="letras-side"> <button className="boton-side"
-                        (click)="offcanvas.dismiss('Cross click')">BODYBOARD</button></li>
+                        (click)="offcanvas.dismiss('Cross click'); irAProductos(2)">BODYBOARD</button></li>
                 <li className="letras-side"> <button className="boton-side"
-                        (click)="offcanvas.dismiss('Cross click')">SKATE</button></li>
+                        (click)="offcanvas.dismiss('Cross click'); irAProductos(3)">SKATE</button></li>
                 <li className="letras-side"><button className="boton-side"
-                        (click)="offcanvas.dismiss('Cross click')">NEOPRENOS</button></li>
+                        (click)="offcanvas.dismiss('Cross click'); irAProductos(4)">NEOPRENOS</button></li>
             </ul>
             <div className="logo-menu">
                 <img class="logo" src="../../assets/logos/Logo1.png" alt="Logo de la tienda del menú" />
@@ -75,9 +75,11 @@
                     </div>
                 </div>
                 <div class="card-botones-cantidad">
-                    <button class="btn btn-primary" (click)="aumentarCantidad(item.producto)">+</button>
+                    <button class="btn btn-primary" (click)="aumentarCantidad(item.producto)"><img
+                            src="../../assets/icons/add-outline.svg" alt=""></button>
                     <span>{{ item.cantidad }}</span>
-                    <button class="btn btn-danger" (click)="disminuirCantidad(item.producto)">-</button>
+                    <button class="btn btn-danger" (click)="disminuirCantidad(item.producto)"><img
+                            src="../../assets/icons/remove-outline.svg" alt=""></button>
 
                 </div>
 
