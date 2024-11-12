@@ -38,4 +38,9 @@ export class CarritoService {
         this.carrito = [];
         this.carritoSubject.next(this.carrito);
     }
+
+    calcularTotal(): number {
+        return this.carrito.reduce((total, item) => total + (item.producto.precio * item.cantidad), 0);
+   }
+
 }

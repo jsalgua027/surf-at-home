@@ -113,7 +113,34 @@ ul li button {
 /*CARRITO DE  COMPRAS*/
 
 .card-contenedor {
-    border: 1px solid #02799A;
+    border: 2px solid #02799A;
     border-radius: 5px;
     margin-bottom: 5px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 90%;
+}
+
+.card-body {
+    display: flex;
+    width: 100%;
+
+}
+
+.card-botones-cantidad {
+    display: flex;
+    justify-content: center;
+    margin: 5px;
+    width: 60%;
+}
+
+.card-botones-cantidad>button {
+    padding: 5px;
+    width: 20%;
+}
+
+.card-botones-cantidad>span {
+    text-align: center;
+    width: 50%
 }

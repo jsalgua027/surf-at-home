@@ -20,6 +20,7 @@ export class HeaderComponent implements OnInit {
 	private offcanvasService = inject(NgbOffcanvas);// el menu desplegable
 	private router = inject(Router);// el enrutamiento
 	closeResult = '';
+	totalCompra: number = 0;
 
 	productosCarrito: { producto: Producto, cantidad: number }[] = [];//array con los productos para el carrito
 
@@ -27,6 +28,7 @@ export class HeaderComponent implements OnInit {
 	ngOnInit() {
 		this.carritoService.obtenerCarrito().subscribe((productos) => {
 			this.productosCarrito = productos;
+			this.totalCompra = this.carritoService.calcularTotal();
 		});
 	}
 
@@ -37,11 +39,13 @@ export class HeaderComponent implements OnInit {
 
 	aumentarCantidad(producto: Producto) {//aumentar
 		this.carritoService.agregarProducto(producto);
+		this.totalCompra = this.carritoService.calcularTotal();
 	}
 
 	disminuirCantidad(producto: Producto) {//disminuir
 
 		this.carritoService.quitarProducto(producto);
+		this.totalCompra = this.carritoService.calcularTotal();
 	}
 
 
