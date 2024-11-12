@@ -57,38 +57,33 @@
 
     <ng-template #carrito let-offcanvas>
         <div class="offcanvas-header custom-offcanvas">
-            <h4 class="offcanvas-title">CARRITO DE COMPRAS</h4>
+            <h4 class="offcanvas-title">MI CARRITO</h4>
             <button type="button" class="btn-close" aria-label="Close"
                 (click)="offcanvas.dismiss('Cross click')"></button>
         </div>
         <div class="offcanvas-body  custom-offcanvas-body">
-            <p>One fine body&hellip;</p>
-            <div class="div">loco1</div>
-            <div class="div">loco1</div>
-            <div class="div">loco1</div>
-            <div class="div">loco1</div>
-            <div class="div">loco1</div>
-            <div class="div">loco1</div>
-            <div class="div">loco1</div>
-            <div class="div">loco1</div>
-            <div class="div">loco1</div>
-            <div class="div">loco1</div>
-            <div class="div">loco1</div>
-            <div class="div">loco1</div>
-            <div class="div">loco1</div>
-            <div class="div">loco1</div>
-            <div class="div">loco1</div>
-            <div class="div">loco1</div>
+            <div class="card-contenedor" *ngFor="let item of productosCarrito">
+                <img [src]="item.producto.foto_producto" alt="{{ item.producto.descripcion }}" class="card-img-top" />
+                <div class="card-body">
+                    <div class="card-carrito-datos">
+                        <h5 class="card-title">{{ item.producto.marca_producto }}</h5>
+                        <p class="card-text">{{ item.producto.descripcion }}</p>
+                        <p class="card-price">{{ item.producto.precio | currency }}</p>
+                    </div>
+                    <div class="card-botones-cantidad">
+                        <button class="btn btn-primary" (click)="aumentarCantidad(item.producto)">+</button>
+                        <span>{{ item.cantidad }}</span>
+                        <button class="btn btn-danger" (click)="disminuirCantidad(item.producto)">-</button>
 
-            <div class="div">loco1</div>
-            <div class="div">loco1</div>
-            <div class="div">loco1</div>
-
+                    </div>
+                </div>
+            </div>
             <div class="text-end">
                 <button type="button" class="btn btn-outline-secondary"
-                    (click)="offcanvas.close('Close click')">Close</button>
+                    (click)="offcanvas.close('Close click'); hacePedido()">Confirmar Pedido</button>
             </div>
         </div>
+
     </ng-template>
 
 </header>

@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { CarritoService } from '../../core/servicios/carrito/carrito-service';
 
 @Component({
   selector: 'app-productos',
@@ -23,8 +24,9 @@ export class ProductosComponent implements OnInit {
   searchTerm = new FormControl('');
   productos: Producto[] = []
   @Input() id_categoria?: number;
-  private productoService = inject(ProductoService);
-  private route = inject(ActivatedRoute);
+  private productoService = inject(ProductoService);// servicio del produtco
+  private route = inject(ActivatedRoute); // enrutamiento
+  private carritoService=inject(CarritoService);//servicio del carrito
 
   constructor() { }
 
@@ -35,7 +37,7 @@ export class ProductosComponent implements OnInit {
       this.id_categoria = +params['idCategoria'];
       this.cargarProductos();
     });
-    this.searchTerm.valueChanges.pipe(
+    this.searchTerm.valueChanges.pipe(//filto de busqueda
       debounceTime(500),
       distinctUntilChanged(),
       switchMap(term => this.productoService.searchProducts(term || ''))
@@ -57,8 +59,8 @@ export class ProductosComponent implements OnInit {
     }
   }
   agregarAlCarrito(producto: Producto) { // Lógica para añadir el producto al carrito 
-    console.log('Producto añadido al carrito:', producto);
-    // Aquí puedes añadir la lógica para agregar al carrito, como una llamada a un servicio de carrito }
+    this.carritoService.agregarProducto(producto);//añado producto
+     console.log('Producto añadido al carrito:', producto);
   }
 }
 
