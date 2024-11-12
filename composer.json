@@ -1,0 +1,9 @@
+{
+    "require": {
+        "firebase/php-jwt": "^6.10"
+    },
+    "autoload": {
+         "psr-4": { "MiProyecto\\": "api/" }, 
+         "files": [ "api/index.php" ] 
+    }
+}
