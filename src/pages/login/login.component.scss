@@ -5,25 +5,28 @@
     /* Añade espacio interno */
     border: 1px solid #ced4da;
     /* Añade borde */
-    width: 50%;
+    width: 40%;
     margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
     /* Centro vertical y horizontal */
     display: flex;
     flex-direction: column;
     justify-content: center;
     /* Centro vertical de los elementos */
-    height: 60vh;
+    height: 75vh;
     /* Ocupa todo el alto disponible */
     box-shadow: 0 25px 40px rgba(0, 0, 0, 0.1);
     /* Añade sombra */
 }
 
 .form-login form {
-    width: 100%;
-    /* Asegúrate de que el formulario ocupe todo el ancho disponible */
+      /* Asegúrate de que el formulario ocupe todo el ancho disponible */
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+ 
     /* Centro horizontal de los elementos dentro del formulario */
 }
 
@@ -37,11 +40,13 @@
     /* Asegúrate de que cada grupo de formulario ocupe todo el ancho disponible */
     margin-bottom: 15px;
     /* Espacio entre los grupos de formulario */
+    flex: 0 1 25%;
 
 }
 
 .form-login form .btn {
     margin-top: 10px;
+
     /* Espacio arriba del botón */
 }
 
