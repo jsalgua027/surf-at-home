@@ -1,8 +1,13 @@
+.contenedor-productos{
+    height: 70vh;
+}
+
 .producto-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 16px;
     padding: 16px;
+    
 }
 
 .card {
@@ -43,15 +48,15 @@
 
 .btn-primary {
     padding: 8px 16px;
-    background-color: #007bff;
+    background-color: #02799A;
     color: #fff;
     border: none;
-    border-radius: 4px;
+    border-radius: 10px;
     cursor: pointer;
 }
 
 .btn-primary:hover {
-    background-color: #0056b3;
+    background-color: #02799A;
 }
 
 /* Estilos para centrar el buscador y ocupar la mitad de la pantalla */

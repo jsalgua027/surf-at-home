@@ -1,7 +1,7 @@
 <div class="buscador-container">
     <input type="text" [formControl]="searchTerm" placeholder="Buscar productos..." />
 </div>
-<div *ngIf="filteredProducts.length > 0; else noProductos">
+<div class="contenedor-productos" *ngIf="filteredProducts.length > 0; else noProductos">
     <div class="producto-grid">
         <div *ngFor="let producto of filteredProducts" class="card">
             <img [src]="producto.foto_producto" alt="{{ producto.descripcion }}" class="card-img-top" />
