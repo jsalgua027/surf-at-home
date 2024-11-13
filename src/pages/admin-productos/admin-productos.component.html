@@ -1,1 +1,100 @@
-<p>admin-productos works!</p>
+<div class="form-productos">
+  <form>
+    <div class="form-group">
+      <label for="marca">Marca</label>
+      <input
+        type="text"
+        id="marca"
+        name="marca"
+        ngModel
+        required
+        class="form-control"
+      />
+    </div>
+    <div class="form-group">
+      <label for="descripcion">Descripción</label>
+      <input
+        type="text"
+        id="descripcion"
+        name="descripcion"
+        ngModel
+        required
+        class="form-control"
+      />
+    </div>
+    <div class="form-group">
+      <label for="precio">Precio</label>
+      <input
+        type="text"
+        id="precio"
+        name="precio"
+        ngModel
+        required
+        class="form-control"
+      />
+    </div>
+    <div class="form-group">
+      <label for="categoria">Categoría</label>
+      <select
+        id="categoria"
+        name="categoria"
+        ngModel
+        required
+        class="form-control"
+      >
+        <option value="" disabled selected>Selecciona una categoría</option>
+        <option value="surf">Surf</option>
+        <option value="body">Bodyboard</option>
+        <option value="skate">Skate</option>
+        <option value="neoprenos">Neoprenos</option>
+        <!-- Agrega más opciones según tus necesidades -->
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="stock">Stock</label>
+      <input
+        type="text"
+        id="stock"
+        name="stock"
+        ngModel
+        required
+        class="form-control"
+      />
+    </div>
+    <div class="form-group">
+      <label for="imagenes">Agregar Imágenes</label>
+      <input
+        type="file"
+        id="imagenes"
+        name="imagenes"
+        multiple
+        class="form-control"
+      />
+    </div>
+    <button type="button" class="btn btn-dark black-button">
+      Agregar Producto
+    </button>
+  </form>
+</div>
+<div class="articulos-categorias">
+  <div class="form-group">
+    <label for="categoriaSelector">Seleccionar Categoría</label>
+    <select
+      id="categoriaSelector"
+      class="form-control"
+      
+    >
+    <option value="" disabled selected>Selecciona una categoría</option>
+    <option value="surf">Surf</option>
+    <option value="body">Bodyboard</option>
+    <option value="skate">Skate</option>
+    <option value="neoprenos">Neoprenos</option>
+    </select>
+  </div>
+  <div class="lista-articulos">
+    <h3>Artículos</h3>
+    <ul>
+      <li *ngFor="let articulo of articulosFiltrados">{{ articulo.nombre }}</li>
+    </ul>
+  </div>
+</div>

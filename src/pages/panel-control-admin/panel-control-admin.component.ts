@@ -1,18 +1,21 @@
 import { Component } from '@angular/core';
 import { NbButtonModule, NbLayoutModule, NbThemeModule,NbTabsetModule, NbAccordionModule } from '@nebular/theme';
-import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAccordionModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
+import { AdminProductosComponent } from "../admin-productos/admin-productos.component";
 
 @Component({
   selector: 'app-panel-control-admin',
   standalone: true,
   imports: [
-    NbButtonModule, 
+    NbButtonModule,
     NbLayoutModule,
     NbThemeModule,
     NbTabsetModule,
     NbAccordionModule,
-    NgbAccordionModule
-  ],
+    NgbAccordionModule,
+    NgbNavModule,
+    AdminProductosComponent
+],
   styles: [`
     :host nb-tab {
       padding: 1.25rem;
@@ -22,5 +25,5 @@ import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
   styleUrl: './panel-control-admin.component.scss'
 })
 export class PanelControlAdminComponent {
-
+	active = 0;
 }

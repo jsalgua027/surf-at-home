@@ -1,89 +1,44 @@
-<div class="contenedor-admin">
-    <h2>Panel de Control</h2>
-    <button class="btn btn-dark">PRODUCTOS</button>
-    <button class="btn btn-dark">PEDIDOS</button>
-    <button class="btn btn-dark">USUARIOS</button>
-</div>
-
-<div class="prueba-tab">
-    <nb-tabset>
-        <nb-tab tabTitle="PRODUCTOS">
-          productos
-        </nb-tab>
-        <nb-tab tabTitle="PEDIDOS">
-          pedidos
-        </nb-tab>
-        <nb-tab tabTitle="USUARIOS">
-            productos
-          </nb-tab>
-       </nb-tabset>
+<div class="contendor-panel">
+    <h2 >Panel de Control</h2>
+    <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+        <li [ngbNavItem]="1">
+            <button ngbNavLink>PRODUCTOS</button>
+            <ng-template ngbNavContent>
+               <app-admin-productos></app-admin-productos>
+            </ng-template>
+        </li>
+        <li [ngbNavItem]="2">
+            <button ngbNavLink>PEDIDOS</button>
+            <ng-template ngbNavContent>
+                <p>
+                    Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko
+                    farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts
+                    ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar
+                    helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson
+                    8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester
+                    stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.
+                </p>
+            </ng-template>
+        </li>
+        <li [ngbNavItem]="3">
+            <button ngbNavLink>USUARIOS</button>
+            <ng-template ngbNavContent>
+                <p>
+                    Sed commodo, leo at suscipit dictum, quam est porttitor sapien, eget sodales nibh elit id diam. Nulla facilisi.
+                    Donec egestas ligula vitae odio interdum aliquet. Duis lectus turpis, luctus eget tincidunt eu, congue et odio.
+                    Duis pharetra et nisl at faucibus. Quisque luctus pulvinar arcu, et molestie lectus ultrices et. Sed diam urna,
+                    egestas ut ipsum vel, volutpat volutpat neque. Praesent fringilla tortor arcu. Vivamus faucibus nisl enim, nec
+                    tristique ipsum euismod facilisis. Morbi ut bibendum est, eu tincidunt odio. Orci varius natoque penatibus et
+                    magnis dis parturient montes, nascetur ridiculus mus. Mauris aliquet odio ac lorem aliquet ultricies in eget
+                    neque. Phasellus nec tortor vel tellus pulvinar feugiat.
+                </p>
+            </ng-template>
+        </li>
+    </ul>
     
-</div>
+    <div [ngbNavOutlet]="nav" class="mt-2"></div>
+    </div>
 
-   <div class="prueba-acord">
-    <nb-accordion>
-        <nb-accordion-item>
-         <nb-accordion-item-header>Product Details</nb-accordion-item-header>
-         <nb-accordion-item-body>
-           Item Content
-         </nb-accordion-item-body>
-        </nb-accordion-item>
-       </nb-accordion>
- 
-  </div>
-   
-  <div ngbAccordion>
-	<div ngbAccordionItem [collapsed]="false">
-		<h2 ngbAccordionHeader>
-			<button ngbAccordionButton>Simple</button>
-		</h2>
-		<div ngbAccordionCollapse>
-			<div ngbAccordionBody>
-				<ng-template>
-					Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon
-					officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf
-					moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim
-					keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur
-					butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably
-					haven't heard of them accusamus labore sustainable VHS.
-				</ng-template>
-			</div>
-		</div>
-	</div>
-	<div ngbAccordionItem>
-		<h2 ngbAccordionHeader>
-			<button ngbAccordionButton>
-				<span>&#9733; <b>Fancy</b> title &#9733;</span>
-			</button>
-		</h2>
-		<div ngbAccordionCollapse>
-			<div ngbAccordionBody>
-				<ng-template>
-					Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon
-					officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf
-					moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim
-					keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur
-					butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably
-					haven't heard of them accusamus labore sustainable VHS.
-				</ng-template>
-			</div>
-		</div>
-	</div>
-	<div ngbAccordionItem [disabled]="true">
-		<h2 ngbAccordionHeader>
-			<button ngbAccordionButton>Disabled</button>
-		</h2>
-		<div ngbAccordionCollapse>
-			<div ngbAccordionBody>
-				<ng-template>
-					Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon
-					officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf
-					moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim
-					keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur
-					butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably
-					haven't heard of them accusamus labore sustainable VHS.
-				</ng-template>
-			</div>
-		</div>
-	</div>
-</div>
+
+
+
