@@ -1,5 +1,5 @@
-<div class="form-productos">
-  <form>
+<div class="contenedor-productos">
+  <form class="formulario">
     <div class="form-group">
       <label for="marca">Marca</label>
       <input
@@ -79,14 +79,16 @@
 </div>
 
 <div class="articulos-categorias">
-  <div class="form-group">
+  <div class="form-group-categorias">
     <label for="categoriaSelector">Seleccionar Categoría</label>
     <select
       id="categoriaSelector"
       class="form-control"
       (change)="filtrarArticulos($event)"
     >
-      <option value="" disabled [selected]="categoriaSeleccionada === null">Selecciona una categoría</option>
+      <option value="" disabled [selected]="categoriaSeleccionada === null">
+        Selecciona una categoría
+      </option>
       <option
         *ngFor="let categoria of categorias"
         [value]="categoria.id_categoria"
@@ -95,12 +97,64 @@
       </option>
     </select>
   </div>
-  <div class="lista-articulos" *ngIf="articulosFiltrados.length > 0">
+ <!--
+   <div class="lista-articulos" *ngIf="articulosFiltrados.length > 0">
     <h3>Artículos</h3>
     <ul>
       <li *ngFor="let articulo of articulosFiltrados">
-        {{ articulo.marca_producto }}
+        <div class="contendor-producto-filtrado">
+          <div class="imagen">{{ articulo.foto_producto }}</div>
+          <div class="marca">{{ articulo.marca_producto }}</div>
+          <div class="descrip">{{ articulo.descripcion }}</div>
+          <div class="stock">{{ articulo.stock }}</div>
+        </div>
       </li>
     </ul>
   </div>
+  -->
+  <div class="table-responsive" *ngIf="articulosFiltrados.length > 0">
+    <h3>Artículos</h3>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Imagen</th>
+          <th scope="col">Marca</th>
+          <th scope="col">Descripción</th>
+          <th scope="col">Stock</th>
+          <th scope="col">#</th>
+          <th scope="col">#</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let articulo of articulosFiltrados; let i = index">
+            <td>
+            <img
+              [src]="articulo.foto_producto"
+              alt="Imagen del producto"
+              class="me-2"
+              style="width: 50px"
+            />
+          </td>
+          <td>{{ articulo.marca_producto }}</td>
+          <td>{{ articulo.descripcion }}</td>
+          <td>{{ articulo.stock }}</td>
+          <td><button class="btn btn-primary">Editar</button></td>
+          <td><button class="btn btn-danger" (click)="open('autofocus')">Borrar</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <ng-template #modalContent let-modal>
+     <div class="modal-header"> 
+      <h4 class="modal-title">Confirmar Eliminación</h4> 
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button> 
+    </div>
+     <div class="modal-body"> <p>¿Estás seguro de que deseas eliminar este artículo?</p> 
+    </div>
+     <div class="modal-footer">
+       <button type="button" class="btn btn-secondary" (click)="modal.dismiss('Cancel click')">Cancelar</button>
+        <button type="button" class="btn btn-danger" (click)="confirmDelete()">Eliminar</button> 
+      </div> 
+    </ng-template>
 </div>
+
