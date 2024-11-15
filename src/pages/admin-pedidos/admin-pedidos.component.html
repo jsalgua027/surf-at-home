@@ -1,10 +1,49 @@
 <div class="contenedor-pedidos">
-    <form action="">
-        <label for="categoria">Categoría</label>
-        <select id="categoria" name="categoria" ngModel required class="form-control">
-            <option value="" diable selected>Seleccione Estado pedido</option>
-        </select>
-
-
+  <div class="form-tipos">
+    <form>
+      <label for="categoria">Seleccione Estado del pedido</label>
+      <select
+        id="categoria"
+        name="categoria"
+        [(ngModel)]="selectedCategoria"
+        (change)="onCategoriaChange()"
+        required
+        class="form-control"
+      >
+       
+        <option
+          *ngFor="let estado of estadoPedido | keyvalue"
+          [value]="estado.value"
+        >
+          {{ estado.value }}
+        </option>
+      </select>
     </form>
+  </div>
+
+  <div class="tabla-pedidos">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Fecha</th>
+          <th>Estado</th>
+          <th>Usuario</th>
+          <th>Total</th>
+          <th>#</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pedido of filteredPedidos">
+          <td>{{ pedido.id_pedido }}</td>
+          <td>{{ pedido.fecha | date }}</td>
+          <td>{{ pedido.estado_pedido }}</td>
+          <td>{{ pedido.id_usuario }}</td>
+          <td>{{ pedido.total | currency }}</td>
+          <td>
+             <button class="btn btn-dark" *ngIf="pedido.estado_pedido === estadoPedido.pendiente"> Entregar </button> </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

@@ -6,21 +6,29 @@ import { Pedido } from '../../pedido/pedido';
 import { PedidoProducto } from '../../pedido-producto/pedido-producto';
 
 @Injectable({
-    providedIn: 'root',
-  })
+  providedIn: 'root',
+})
+export class AdminPedidosComponentService {
+  private pedidoSubject: BehaviorSubject<Pedido[]> = new BehaviorSubject<
+    Pedido[]
+  >(PEDIDOS_MOCK);
+  private pedidoProductoSubject: BehaviorSubject<PedidoProducto[]> =
+    new BehaviorSubject<PedidoProducto[]>(PEDIDOS_PRODUCTOS_MOCK);
 
-  export class AdminPedidosComponentService {
-    private pedidoSubject: BehaviorSubject<Pedido[]> = new BehaviorSubject<Pedido[]>(PEDIDOS_MOCK);
-    private pedidoProductoSubject: BehaviorSubject<PedidoProducto[]> = new BehaviorSubject<PedidoProducto[]>(PEDIDOS_PRODUCTOS_MOCK);
+  constructor() {}
 
-    constructor(){}
-
-    getPedidos():Observable<Pedido[]>{
-        return this.pedidoSubject.asObservable();
-    }
-
-    getPedidosProducto():Observable<PedidoProducto[]>{
-        return this.pedidoProductoSubject.asObservable();
-    }
-
+  getPedidos(): Observable<Pedido[]> {
+    return this.pedidoSubject.asObservable();
   }
+
+  getPedidosProducto(): Observable<PedidoProducto[]> {
+    return this.pedidoProductoSubject.asObservable();
+  }
+  updatePedidos(pedidos: Pedido[]): void {
+    this.pedidoSubject.next(pedidos);
+  }
+
+  updatePedidosProducto(pedidosProducto: PedidoProducto[]): void {
+    this.pedidoProductoSubject.next(pedidosProducto);
+  }
+}
