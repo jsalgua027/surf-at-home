@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NbButtonModule, NbLayoutModule, NbThemeModule,NbTabsetModule, NbAccordionModule } from '@nebular/theme';
 import { NgbAccordionModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdminProductosComponent } from "../admin-productos/admin-productos.component";
+import { AdminPedidosComponent } from '../admin-pedidos/admin-pedidos.component';
+
 
 @Component({
   selector: 'app-panel-control-admin',
@@ -14,7 +16,8 @@ import { AdminProductosComponent } from "../admin-productos/admin-productos.comp
     NbAccordionModule,
     NgbAccordionModule,
     NgbNavModule,
-    AdminProductosComponent
+    AdminProductosComponent,
+    AdminPedidosComponent
 ],
   styles: [`
     :host nb-tab {

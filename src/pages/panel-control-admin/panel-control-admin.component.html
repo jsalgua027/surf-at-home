@@ -1,18 +1,18 @@
 <div class="contendor-panel">
-    <h2 >Panel de Control</h2>
+    <h2>Panel de Control</h2>
     <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
         <li [ngbNavItem]="1">
             <button ngbNavLink>PRODUCTOS</button>
             <ng-template ngbNavContent>
-               <app-admin-productos></app-admin-productos>
+                <app-admin-productos></app-admin-productos>
             </ng-template>
         </li>
         <li [ngbNavItem]="2">
             <button ngbNavLink>PEDIDOS</button>
             <ng-template ngbNavContent>
-                
-                    <h1>AQUI LA LISTA DE PEDIDOS</h1>
-                
+
+                <app-admin-pedidos></app-admin-pedidos>
+
             </ng-template>
         </li>
         <li [ngbNavItem]="3">
@@ -22,10 +22,6 @@
             </ng-template>
         </li>
     </ul>
-    
+
     <div [ngbNavOutlet]="nav" class="mt-2"></div>
-    </div>
-
-
-
-
+</div>
