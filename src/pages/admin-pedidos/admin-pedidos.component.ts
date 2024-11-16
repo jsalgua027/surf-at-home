@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Pedido } from '../../core/pedido/pedido';
 import { EstadoPedido } from '../../core/enums/estado-pedido';
-AdminPedidosComponentService;
+
 
 @Component({
   selector: 'app-admin-pedidos',

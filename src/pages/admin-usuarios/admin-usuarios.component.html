@@ -1,1 +1,25 @@
-<p>admin-usuarios works!</p>
+<div class="contenedor-usuarios">
+    <div class="tabla-usuarios">
+        <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Dirección</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let usuario of listaUsuarios">
+                <td>{{ usuario.id_usuario }}</td>
+                <td>{{ usuario.nombre }}</td>
+                <td>{{ usuario.email }}</td>
+                <td>{{ usuario.direccion }}</td>
+                 <td>
+                   <button class="btn btn-dark" >Banear</button>
+                 </td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+</div>

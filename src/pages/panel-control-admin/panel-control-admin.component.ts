@@ -3,6 +3,7 @@ import { NbButtonModule, NbLayoutModule, NbThemeModule,NbTabsetModule, NbAccordi
 import { NgbAccordionModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdminProductosComponent } from "../admin-productos/admin-productos.component";
 import { AdminPedidosComponent } from '../admin-pedidos/admin-pedidos.component';
+import { AdminUsuariosComponent } from '../admin-usuarios/admin-usuarios.component';
 
 
 @Component({
@@ -17,7 +18,8 @@ import { AdminPedidosComponent } from '../admin-pedidos/admin-pedidos.component'
     NgbAccordionModule,
     NgbNavModule,
     AdminProductosComponent,
-    AdminPedidosComponent
+    AdminPedidosComponent,
+    AdminUsuariosComponent 
 ],
   styles: [`
     :host nb-tab {
