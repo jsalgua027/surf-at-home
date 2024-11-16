@@ -4,6 +4,8 @@ import { FormCuentaComponent } from '../pages/form-cuenta/form-cuenta.component'
 import { InicioComponent } from '../pages/inicio/inicio.component';
 import { ProductosComponent } from '../pages/productos/productos.component';
 import { PanelControlAdminComponent } from '../pages/panel-control-admin/panel-control-admin.component';
+import { AdminEditarProductosComponent } from '../pages/admin-editar-productos/admin-editar-productos.component';
+
 
 
 
@@ -31,6 +33,11 @@ export const routes: Routes = [
     {
         path:'productos/:idCategoria',
         component:ProductosComponent
+
+    },
+    {
+        path:'editar-producto/:id',
+        component:AdminEditarProductosComponent
 
     },
     

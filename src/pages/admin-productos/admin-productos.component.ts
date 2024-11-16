@@ -4,6 +4,7 @@ import { Producto } from '../../core/producto/producto';
 import { Categoria } from '../../core/categoria/categoria';
 import { CommonModule } from '@angular/common';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-productos',
@@ -20,6 +21,8 @@ export class AdminProductosComponent implements OnInit {
   categoriaSeleccionada: number | null = null; // selector de categorias
 
   private adminProductosService = inject(AdminProductosComponentService); // servicios del admin product
+
+  private router=inject(Router);// para rediriguir al componente que quiero
 
   @ViewChild('modalContent', { static: true }) modalContent: any;
 
@@ -66,6 +69,10 @@ export class AdminProductosComponent implements OnInit {
         console.log('Modal dismissed', reason);
       }
     );
+  }
+
+  editarProducto(id:string){
+    this.router.navigate(['/editar-producto', id]);
   }
   confirmDelete() {}
 }
