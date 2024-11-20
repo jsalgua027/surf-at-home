@@ -10,16 +10,19 @@ import { AdminEditarProductosComponent } from '../pages/admin-editar-productos/a
 
 
 export const routes: Routes = [
-    {
+  /**
+   *   {
         path:'',
         component:PanelControlAdminComponent
 
     },
-/**{
+   * 
+   */
+{
         path:'',
         component:InicioComponent
 
-    }, */
+    }, 
     
     {
         path:'login',
