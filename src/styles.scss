@@ -2,22 +2,23 @@
 
 /*Estilos para el modal  Menu*/
 
-
 body > ngb-offcanvas-panel > div.offcanvas-header h3 {
-   text-align: center;
-   color: #02799A;
+  text-align: center;
+  color: #02799a;
 }
 
-body > ngb-offcanvas-panel > div.offcanvas-body > ul{
-    display: flex;
-    flex-direction: column;
+body > ngb-offcanvas-panel > div.offcanvas-body > ul {
+  display: flex;
+  flex-direction: column;
 }
 
-body > ngb-offcanvas-panel > div.offcanvas-body > ul>li{
-    margin: 1px;
-    border-bottom: 3px solid #02799A;
+body > ngb-offcanvas-panel > div.offcanvas-body > ul > li {
+  margin: 1px;
+  border-bottom: 3px solid #02799a;
 }
-.btn-primary { background-color: #02799A; 
-    /* Cambia este valor al color que prefieras */
-     border-color: #02799A; /* Cambia este valor al color que prefieras */ 
+.btn-primary {
+  background-color: #02799a;
+  /* Cambia este valor al color que prefieras */
+  border-color: #02799a; /* Cambia este valor al color que prefieras */
 }
+
