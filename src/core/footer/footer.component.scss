@@ -1,5 +1,4 @@
-
-.contenedor-footer {
+footer {
     background-color: #02799A;
     color: white;
     width: 100%;
@@ -7,7 +6,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-   
+
 }
 
 
@@ -30,46 +29,54 @@
 
 
 
-.horarios{
+.horarios {
     width: 45%;
     display: flex;
-   margin: 5px;
+    margin: 5px;
 }
-.horarios img{
+
+.horarios img {
     flex: 0
 }
+
 .letras-horas {
     margin: 2px;
     width: 50%;
     display: flex;
     flex-direction: column;
 }
-.letras-horas div{
+
+.letras-horas div {
     width: 100%;
 }
-.info{
-    width:45%;
+
+.info {
+    width: 45%;
     margin: 8px;
 }
 
-.email{
+.email {
     display: flex;
     justify-content: center;
-  
+
 }
-.telefono{
+
+.telefono {
     display: flex;
     justify-content: center;
 }
-.elementos-footer{
+
+.elementos-footer {
     margin: 5px;
 }
-.redes-sociales{
-        width: 100%;
-        display: flex;
-      justify-content: center;
-      
+
+.redes-sociales {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
 }
-.redes-sociales>div>img{
+
+.redes-sociales>div>img {
     margin: 10px;
 }
