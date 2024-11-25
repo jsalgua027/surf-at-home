@@ -1,1 +1,62 @@
-<p>admin-editar-productos works!</p>
+<div class="contenedor-editar-productos">
+  <form class="formulario">
+    <div class="form-group">
+      <label for="marca">Marca</label>
+      <input
+        type="text"
+        id="marca"
+        name="marca"
+        ngModel
+        required
+        class="form-control"
+      />
+    </div>
+    <div class="form-group">
+      <label for="descripcion">Descripción</label>
+      <input
+        type="text"
+        id="descripcion"
+        name="descripcion"
+        ngModel
+        required
+        class="form-control"
+      />
+    </div>
+    <div class="form-group">
+      <label for="precio">Precio</label>
+      <input
+        type="text"
+        id="precio"
+        name="precio"
+        ngModel
+        required
+        class="form-control"
+      />
+    </div>
+ 
+    <div class="form-group">
+      <label for="stock">Stock</label>
+      <input
+        type="text"
+        id="stock"
+        name="stock"
+        ngModel
+        required
+        class="form-control"
+      />
+    </div>
+    <div class="form-group">
+      <label for="imagenes">Agregar Imágenes</label>
+      <input
+        type="file"
+        id="imagenes"
+        name="imagenes"
+        multiple
+        class="form-control"
+      />
+    </div>
+    <button type="button" class="btn btn-dark black-button">
+      Editar
+    </button>
+  </form>
+</div>

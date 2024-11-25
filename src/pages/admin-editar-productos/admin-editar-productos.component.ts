@@ -1,11 +1,14 @@
 import { Component,OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AdminEditarProductosService } from '../../core/servicios/admin-editar-productos/admin-editar-productos-service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-admin-editar-productos',
   standalone: true,
-  imports: [],
+  imports: [
+    CommonModule
+  ],
   templateUrl: './admin-editar-productos.component.html',
   styleUrl: './admin-editar-productos.component.scss'
 })
