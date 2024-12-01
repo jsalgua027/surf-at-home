@@ -43,4 +43,25 @@ export class ProductoService {
       return of(result as T);
     };
   }
+
+ // Obtener productos por categoría
+ getProductosPorCategoriaApi(idCategoria: number): Observable<Producto[]> {
+  const url = `${this.apiUrl}?categoria=${idCategoria}`;
+  return this.http
+    .get<Producto[]>(url)
+    .pipe(catchError(this.handleErrorCat<Producto[]>('getProductosPorCategoria', [])));
+}
+
+// Manejo de errores
+private handleErrorCat<T>(operation = 'operation', result?: T) {
+  return (error: any): Observable<T> => {
+    console.error(`${operation} failed: ${error.message}`);
+    return new Observable((observer) => {
+      observer.next(result as T);
+      observer.complete();
+    });
+  };
+}
+
+
 }
