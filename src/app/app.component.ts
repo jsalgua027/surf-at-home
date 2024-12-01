@@ -4,6 +4,7 @@ import { routes } from './app.routes';
 import { HeaderComponent } from '../core/header/header.component';
 import { FooterComponent } from '../core/footer/footer.component';
 import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -13,6 +14,7 @@ import { CommonModule } from '@angular/common';
     CommonModule,
     HeaderComponent,
     FooterComponent,
+   
    
 ],
 

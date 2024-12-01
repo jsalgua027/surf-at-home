@@ -16,5 +16,6 @@ export const appConfig: ApplicationConfig = {
     ...(nbThemeProviders || []),
     BrowserAnimationsModule,
     provideAnimations(),
+    provideHttpClient()
   ]
 };
