@@ -8,7 +8,7 @@ import { catchError, map } from 'rxjs/operators';
 @Injectable({ providedIn: 'root' })
 export class ProductoService {
     
-  private apiUrl = 'http://localhost/Proyectos/api/productos.php';
+  private apiUrl = 'http://localhost/Proyectos/api/get_products.php';
   private http = inject(HttpClient);
 
   constructor() {}
