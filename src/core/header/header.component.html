@@ -65,7 +65,7 @@
             <div class="card-contenedor" *ngFor="let item of productosCarrito">
                 <div class="card-body">
                     <div class="card-img">
-                        <img [src]="item.producto.foto_producto" alt="{{ item.producto.descripcion }}"
+                        <img [src]="getProductoFotoUrl(item.producto)" alt="{{ item.producto.descripcion }}"
                             class="card-img-top" />
                     </div>
                     <div class="card-carrito-datos">
