@@ -4,7 +4,7 @@
 <div class="contenedor-productos" *ngIf="filteredProducts.length > 0; else noProductos">
     <div class="producto-grid">
         <div *ngFor="let producto of filteredProducts" class="card">
-            <img [src]="producto.foto_producto" alt="{{ producto.descripcion }}" class="card-img-top" />
+            <img [src]="getProductoFotoUrl(producto)" alt="{{ producto.descripcion }}" class="card-img-top" />
             <div class="card-body">
                 <h5 class="card-title">{{ producto.marca_producto }}</h5>
                 <p class="card-text">{{ producto.descripcion }}</p>

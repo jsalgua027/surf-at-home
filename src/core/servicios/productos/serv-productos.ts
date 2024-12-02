@@ -7,27 +7,29 @@ import { catchError, map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class ProductoService {
-    
   private apiUrl = 'http://localhost/Proyectos/api/get_products.php';
   private http = inject(HttpClient);
 
   constructor() {}
-  getProductosPorCategoria(idCategoria: number): Observable<Producto[]> {
-    const productos = PRODUCTOS_MOCK.filter(
-      (producto) => producto.id_categoria === idCategoria
-    );
-    return of(productos);
-  }
+ 
 
   searchProducts(term: string): Observable<Producto[]> {
-    if (!term.trim()) {
-      // Si el término de búsqueda está vacío, devuelve todos los productos
-      return of(PRODUCTOS_MOCK);
-    }
-    const productosFiltrados = PRODUCTOS_MOCK.filter((producto) =>
-      producto.descripcion.toLowerCase().includes(term.toLowerCase())
+    return this.getAllProducts().pipe(
+      map((productos) =>
+        productos.filter((producto) =>
+          producto.descripcion.toLowerCase().includes(term.toLowerCase())
+        )
+      ),
+      catchError(this.handleErrorSearch<Producto[]>('searchProducts', []))
     );
-    return of(productosFiltrados);
+  }
+
+  // Manejo de errores private
+  handleErrorSearch<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(`${operation} failed: ${error.message}`);
+      return of(result as T);
+    };
   }
 
   // Obtener todos los productos
@@ -44,24 +46,26 @@ export class ProductoService {
     };
   }
 
- // Obtener productos por categoría
- getProductosPorCategoriaApi(idCategoria: number): Observable<Producto[]> {
-  const url = `${this.apiUrl}?categoria=${idCategoria}`;
-  return this.http
-    .get<Producto[]>(url)
-    .pipe(catchError(this.handleErrorCat<Producto[]>('getProductosPorCategoria', [])));
-}
+  // Obtener productos por categoría
+  getProductosPorCategoriaApi(idCategoria: number): Observable<Producto[]> {
+    const url = `${this.apiUrl}?categoria=${idCategoria}`;
+    return this.http
+      .get<Producto[]>(url)
+      .pipe(
+        catchError(
+          this.handleErrorCat<Producto[]>('getProductosPorCategoria', [])
+        )
+      );
+  }
 
-// Manejo de errores
-private handleErrorCat<T>(operation = 'operation', result?: T) {
-  return (error: any): Observable<T> => {
-    console.error(`${operation} failed: ${error.message}`);
-    return new Observable((observer) => {
-      observer.next(result as T);
-      observer.complete();
-    });
-  };
-}
-
-
+  // Manejo de errores
+  private handleErrorCat<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(`${operation} failed: ${error.message}`);
+      return new Observable((observer) => {
+        observer.next(result as T);
+        observer.complete();
+      });
+    };
+  }
 }

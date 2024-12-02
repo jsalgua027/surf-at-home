@@ -50,11 +50,17 @@ export class ProductosComponent implements OnInit {
 
   }
 
+  getProductoFotoUrl(producto: Producto): string {
+     return `../../assets/Productos/${producto.foto_producto}`;
+     }
+
+
   cargarProductos() {
     if (this.id_categoria) {
-      this.productoService.getProductosPorCategoria(this.id_categoria).subscribe(
+      this.productoService.getProductosPorCategoriaApi(this.id_categoria).subscribe(
         (productos: Producto[]) => {
-          this.productos = productos; this.filteredProducts = productos;
+          this.productos = productos;
+           this.filteredProducts = productos;
         });
     }
   }
