@@ -1,26 +1,25 @@
-.contenedor-productos{
-    height: 70vh;
-}
+
 
 .producto-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 16px;
     padding: 16px;
-    
+    margin-bottom: 150px;
 }
 
 .card {
     border: 1px solid #ccc;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 5px 1px 5px rgba(0, 0, 0, 0.2);
     background-color: #fff;
 }
 
 .card-img-top {
-    max-width: 100%;
+    max-width: 80%;
     height: auto;
+    margin-top: 2px;
 }
 
 .card-body {
