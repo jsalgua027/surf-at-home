@@ -89,15 +89,13 @@
       <option value="" disabled [selected]="categoriaSeleccionada === null">
         Selecciona una categoría
       </option>
-      <option
-        *ngFor="let categoria of categorias"
-        [value]="categoria.id_categoria"
-      >
-        {{ categoria.nombre_categoria }}
-      </option>
+      <option value="1">SURF</option>
+      <option value="2">BODYBOARD</option>
+      <option value="3">SKATE</option>
+      <option value="4">NEOPRENOS</option>
     </select>
   </div>
- <!--
+  <!--
    <div class="lista-articulos" *ngIf="articulosFiltrados.length > 0">
     <h3>Artículos</h3>
     <ul>
@@ -127,9 +125,9 @@
       </thead>
       <tbody>
         <tr *ngFor="let articulo of articulosFiltrados; let i = index">
-            <td>
+          <td>
             <img
-              [src]="articulo.foto_producto"
+              [src]="getProductoFotoUrl(articulo)"
               alt="Imagen del producto"
               class="me-2"
               style="width: 50px"
@@ -138,23 +136,47 @@
           <td>{{ articulo.marca_producto }}</td>
           <td>{{ articulo.descripcion }}</td>
           <td>{{ articulo.stock }}</td>
-          <td><button class="btn btn-primary" (click)="editarProducto(articulo.id_producto)">Editar</button></td>
-          <td><button class="btn btn-danger" (click)="open('autofocus')">Borrar</button></td>
+          <td>
+            <button
+              class="btn btn-primary"
+              (click)="editarProducto(articulo.id_producto)"
+            >
+              Editar
+            </button>
+          </td>
+          <td>
+            <button class="btn btn-danger" (click)="open('autofocus')">
+              Borrar
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>
   </div>
   <ng-template #modalContent let-modal>
-     <div class="modal-header"> 
-      <h4 class="modal-title">Confirmar Eliminación</h4> 
-      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button> 
+    <div class="modal-header">
+      <h4 class="modal-title">Confirmar Eliminación</h4>
+      <button
+        type="button"
+        class="btn-close"
+        aria-label="Close"
+        (click)="modal.dismiss('Cross click')"
+      ></button>
     </div>
-     <div class="modal-body"> <p>¿Estás seguro de que deseas eliminar este artículo?</p> 
+    <div class="modal-body">
+      <p>¿Estás seguro de que deseas eliminar este artículo?</p>
     </div>
-     <div class="modal-footer">
-       <button type="button" class="btn btn-secondary" (click)="modal.dismiss('Cancel click')">Cancelar</button>
-        <button type="button" class="btn btn-danger" (click)="confirmDelete()">Eliminar</button> 
-      </div> 
-    </ng-template>
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn btn-secondary"
+        (click)="modal.dismiss('Cancel click')"
+      >
+        Cancelar
+      </button>
+      <button type="button" class="btn btn-danger" (click)="confirmDelete()">
+        Eliminar
+      </button>
+    </div>
+  </ng-template>
 </div>
-

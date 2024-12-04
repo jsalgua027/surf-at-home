@@ -26,7 +26,7 @@ ngOnInit(): void {
 }
 
 volver(){
-  this.rutas.navigate(['']);
+  this.rutas.navigate(['/admin']);
 }
 
 }

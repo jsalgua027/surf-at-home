@@ -5,6 +5,8 @@ import { Categoria } from '../../core/categoria/categoria';
 import { CommonModule } from '@angular/common';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
+import { ProductoService } from '../../core/servicios/productos/serv-productos';
+
 
 @Component({
   selector: 'app-admin-productos',
@@ -15,13 +17,10 @@ import { Router } from '@angular/router';
 })
 export class AdminProductosComponent implements OnInit {
   categorias: Categoria[] = []; //array de categorias
-
   articulosFiltrados: Producto[] = []; // array de productos flitrados  para la tabla
-
   categoriaSeleccionada: number | null = null; // selector de categorias
-
+  private productosService=inject(ProductoService)
   private adminProductosService = inject(AdminProductosComponentService); // servicios del admin product
-
   private router=inject(Router);// para rediriguir al componente que quiero
 
   @ViewChild('modalContent', { static: true }) modalContent: any;
@@ -34,16 +33,18 @@ export class AdminProductosComponent implements OnInit {
     });
     this.articulosFiltrados = []; // en la primera carga quiero el array vacio
   }
-
+  
+//gestion de imagenes
+  getProductoFotoUrl(producto: Producto): string {
+    return `../../assets/Productos/${producto.foto_producto}`;
+    }
   // fltrador de productos segun categoria
   filtrarArticulos(event: Event) {
     const seleccion = (event.target as HTMLSelectElement).value;
     if (seleccion !== '') {
       this.categoriaSeleccionada = parseInt(seleccion, 10); // mi interface usa number
-      this.adminProductosService.getProductos().subscribe((productos) => {
-        this.articulosFiltrados = productos.filter(
-          (articulo) => articulo.id_categoria === this.categoriaSeleccionada
-        );
+      this.adminProductosService.getProductosPorCategoria(this.categoriaSeleccionada).subscribe((productos) => {
+        this.articulosFiltrados = productos
       });
     } else {
       this.categoriaSeleccionada = null;
