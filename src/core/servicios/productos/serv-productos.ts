@@ -1,7 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Producto } from '../../producto/producto';
-import { PRODUCTOS_MOCK } from '../../../mocks/productos-mock';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
 

@@ -8,7 +8,7 @@ export interface Usuario{
  nombre:string;
  direccion:string;
  telefono:string;
- tipo:TipoUsuario;
+ tipo:string;
  token:string
 
 }

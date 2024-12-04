@@ -1,102 +1,109 @@
 import { Component, inject, TemplateRef, OnInit } from '@angular/core';
-import { NgbDatepickerModule, NgbOffcanvas, OffcanvasDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbDatepickerModule,
+  NgbOffcanvas,
+  OffcanvasDismissReasons,
+} from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { Producto } from '../producto/producto';
 import { CarritoService } from '../servicios/carrito/carrito-service'; //servico del carrito
 import { CommonModule } from '@angular/common';
+import { UsersService } from '../servicios/usuarios/usuarios-service';
 
 @Component({
-	selector: 'app-header',
-	standalone: true,
-	imports: [
-		NgbDatepickerModule,
-		CommonModule
-	],
-	templateUrl: './header.component.html',
-	styleUrl: './header.component.scss'
+  selector: 'app-header',
+  standalone: true,
+  imports: [NgbDatepickerModule, CommonModule],
+  templateUrl: './header.component.html',
+  styleUrl: './header.component.scss',
 })
 export class HeaderComponent implements OnInit {
-	private carritoService = inject(CarritoService);// los servicios del carrito
-	private offcanvasService = inject(NgbOffcanvas);// el menu desplegable
-	private router = inject(Router);// el enrutamiento
-	closeResult = '';
-	totalCompra: number = 0;
+  private carritoService = inject(CarritoService); // los servicios del carrito
+  private offcanvasService = inject(NgbOffcanvas); // el menu desplegable
+  private usersService = inject(UsersService); // servicios de los usuarios
+  private router = inject(Router); // el enrutamiento
+  closeResult = '';
+  totalCompra: number = 0;
 
-	productosCarrito: { producto: Producto, cantidad: number }[] = [];//array con los productos para el carrito
+  productosCarrito: { producto: Producto; cantidad: number }[] = []; //array con los productos para el carrito
 
-	constructor() { }
-	ngOnInit() {
-		this.carritoService.obtenerCarrito().subscribe((productos) => {
-			this.productosCarrito = productos;
-			this.totalCompra = this.carritoService.calcularTotal();
-		});
-	}
+  constructor() {}
+  ngOnInit() {
+    this.carritoService.obtenerCarrito().subscribe((productos) => {
+      this.productosCarrito = productos;
+      this.totalCompra = this.carritoService.calcularTotal();
+    });
+  }
 
-	getProductoFotoUrl(producto: Producto): string {
-		return `../../assets/Productos/${producto.foto_producto}`;
-		}
-   
+  getProductoFotoUrl(producto: Producto): string {
+    return `../../assets/Productos/${producto.foto_producto}`;
+  }
 
- /**
-  * Gestión de cantidades
-  * 
-  * */
+  /**
+   * Gestión de cantidades
+   *
+   * */
 
-	aumentarCantidad(producto: Producto) {//aumentar
-		this.carritoService.agregarProducto(producto);
-		this.totalCompra = this.carritoService.calcularTotal();
-	}
+  aumentarCantidad(producto: Producto) {
+    //aumentar
+    this.carritoService.agregarProducto(producto);
+    this.totalCompra = this.carritoService.calcularTotal();
+  }
 
-	disminuirCantidad(producto: Producto) {//disminuir
+  disminuirCantidad(producto: Producto) {
+    //disminuir
 
-		this.carritoService.quitarProducto(producto);
-		this.totalCompra = this.carritoService.calcularTotal();
-	}
+    this.carritoService.quitarProducto(producto);
+    this.totalCompra = this.carritoService.calcularTotal();
+  }
 
+  /*Enrutamiento de la cabecera y el menu offcanvas*/
+  irALogin() {
+    this.router.navigate(['/login']);
+  }
 
-	/*Enrutamiento de la cabecera y el menu offcanvas*/
-	irALogin() {
-		this.router.navigate(['/login']);
-	}
+  irAInicio() {
+    this.router.navigate(['/']);
+  }
 
-	irAInicio() {
-		this.router.navigate(['/']);
-	}
-	
-	irAProductos(idCategoria: number) {
-		 this.router.navigate(['/productos', idCategoria]);
-		 }
+  irAProductos(idCategoria: number) {
+    this.router.navigate(['/productos', idCategoria]);
+  }
 
-	
-	open(content: TemplateRef<any>) {
-		this.offcanvasService.open(content, { ariaLabelledBy: 'offcanvas-basic-title' }).result.then(
-			(result) => {
-				this.closeResult = `Closed with: ${result}`;
-			},
-			(reason) => {
-				this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-			},
-		);
-	}
+  open(content: TemplateRef<any>) {
+    this.offcanvasService
+      .open(content, { ariaLabelledBy: 'offcanvas-basic-title' })
+      .result.then(
+        (result) => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        }
+      );
+  }
 
-	private getDismissReason(reason: any): string {
-		switch (reason) {
-			case OffcanvasDismissReasons.ESC:
-				return 'by pressing ESC';
-			case OffcanvasDismissReasons.BACKDROP_CLICK:
-				return 'by clicking on the backdrop';
-			default:
-				return `with: ${reason}`;
-		}
-	}
+  private getDismissReason(reason: any): string {
+    switch (reason) {
+      case OffcanvasDismissReasons.ESC:
+        return 'by pressing ESC';
+      case OffcanvasDismissReasons.BACKDROP_CLICK:
+        return 'by clicking on the backdrop';
+      default:
+        return `with: ${reason}`;
+    }
+  }
 
-	openEnd(carrito: TemplateRef<any>) {
-		this.offcanvasService.open(carrito, { position: 'end' });
-	}
+  openEnd(carrito: TemplateRef<any>) {
+    this.offcanvasService.open(carrito, { position: 'end' });
+  }
 
-	hacePedido() {
+  hacePedido() {}
 
-	}
+  /********Cierro sesión con el servicio de los usuarios*/
 
-
+  logout() {
+    this.usersService.logout();
+	this.router.navigate(['/']);
+  }
 }

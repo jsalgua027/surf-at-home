@@ -43,7 +43,7 @@ export class ProductosComponent implements OnInit {
       switchMap(term => this.productoService.searchProducts(term || ''))
     ).subscribe(products => {
       this.filteredProducts = products;
-      console.log('Productos filtrados:', JSON.stringify(products, null, 2));
+    //  console.log('Productos filtrados:', JSON.stringify(products, null, 2));
       
     });
 

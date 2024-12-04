@@ -1,31 +1,63 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import {FormControl} from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { Router} from '@angular/router';
+import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { UsersService } from '../../core/servicios/usuarios/usuarios-service';
 
-/**comentarios de  prueba de user para git */
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-   
-  ],
+  imports: [CommonModule, FormsModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  styleUrl: './login.component.scss',
 })
 export class LoginComponent {
-  private router=inject(Router);
-  constructor(){}
-  
-  createAccount(){}
-  onSubmit(){}
-  irCrearCuenta(){
+  private router = inject(Router);
+  private usuarioService = inject(UsersService);
+
+  email: string = '';
+  password: string = '';
+
+  constructor() {}
+
+  onSubmit() {
+    // Crear un objeto con los datos del formulario
+    if (this.email.trim() === '' || this.password.trim() === '') {
+      console.error('Email o contraseña vacíos');
+      return;
+    }
+    const usuario = {
+      email: this.email,
+      password: this.password,
+    };
+    console.log(
+      'los datos recogidos en el onsubmit' + JSON.stringify(usuario, null, 2)
+    );
+    // Enviar los datos al servicio
+    this.usuarioService.login(usuario).subscribe(
+      (response: any) => {
+             
+        // Guardo el Token
+        this.usuarioService.saveTokenWithDate(response.token);
+
+        //gestiono el tipo de usuario
+        if (response.tipo === 'administrador') {
+          this.router.navigate(['/admin']);
+        } else {
+          this.router.navigate(['/']);
+        }
+      },
+      (error: any) => {
+        // Manejar los errores aquí
+        console.error('Error en el login', error);
+      }
+    );
+  }
+
+  irCrearCuenta() {
     this.router.navigate(['/crear-cuenta']);
   }
-  
-  
 }
