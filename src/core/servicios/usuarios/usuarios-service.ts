@@ -5,7 +5,7 @@ import { catchError, map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class UsersService {
-  private apiUrl = 'http://localhost/Proyectos/api/get_users.php';
+  private apiUrl = 'http://localhost/Proyectos/surf-at-home/api/get_users.php';
   private http = inject(HttpClient);
 
   login(usuario: { email: string; password: string }): Observable<any> {
