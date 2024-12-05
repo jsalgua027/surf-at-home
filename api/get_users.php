@@ -1,21 +1,19 @@
 <?php
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization, token, cache-control");
 header('Content-Type: application/json; charset=utf-8');
+
 // Conexión a la base de datos
 $host = 'localhost';
 $dbname = 'bd_surfathome';
-$username = 'jose'; // Cambia esto si tu usuario de MySQL es diferente
-$password = 'josefa'; // Cambia esto si tienes una contraseña para MySQL
+$username = 'jose';
+$password = 'josefa';
+
 try {
     $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
-    header("Access-Control-Allow-Origin: *");
-    header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
-    header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization, token, cache-control");
-    header('Content-Type: application/json; charset=utf-8');
     die(json_encode(['error' => 'Error al conectar con la base de datos: ' . $e->getMessage()]));
 }
 
@@ -28,19 +26,28 @@ if ($method == "OPTIONS") {
 }
 
 // Función para generar un token
-function generateToken()
-{
-    return bin2hex(random_bytes(16)); // Genera un token de 32 caracteres
+function generateToken() {
+    return bin2hex(random_bytes(16));
 }
 
-// Manejar diferentes métodos HTTP
-switch ($method) {
-    case 'GET':
-        // Lógica para obtener datos del usuario (logueo)
-        try {
-            if (isset($_GET['email']) && isset($_GET['password'])) {
-                $email = $_GET['email'];
-                $password = md5($_GET['password']);
+// Lógica para manejar las solicitudes POST
+if ($method == 'POST') {
+    $data = json_decode(file_get_contents('php://input'), true);
+    
+    if (!isset($data['action'])) {
+        http_response_code(400);
+        echo json_encode(['message' => 'Acción no especificada']);
+        exit();
+    }
+
+    $action = $data['action'];
+    
+    switch ($action) {
+        case 'login':
+            // Lógica para obtener datos del usuario (logueo)
+            if (isset($data['email']) && isset($data['password'])) {
+                $email = $data['email'];
+                $password = md5($data['password']);
                 $query = 'SELECT * FROM usuario WHERE email = :email AND password = :password';
                 $stmt = $conn->prepare($query);
                 $stmt->bindParam(':email', $email);
@@ -58,58 +65,40 @@ switch ($method) {
                 http_response_code(400);
                 echo json_encode(['message' => 'Faltan parámetros de email o password']);
             }
-        } catch (Exception $e) {
-            // Cabeceras de CORS en caso de error en GET
-            header("Access-Control-Allow-Origin: *");
-            header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
-            header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization, token, cache-control");
-            header('Content-Type: application/json; charset=utf-8');
-            http_response_code(500);
-            echo json_encode(['error' => $e->getMessage()]);
-        }
-        exit();
+            break;
 
-    case 'POST':
-        // Lógica para crear un nuevo usuario
-        try {
-            $data = json_decode(file_get_contents('php://input'), true);
-            if (isset($data['email']) && isset($data['password']) && isset($data['nombre']) && isset($data['direccion']) && isset($data['telefono']) && isset($data['tipo'])) {
+        case 'createUser':
+            // Lógica para crear un nuevo usuario
+            if (isset($data['email']) && isset($data['password']) && isset($data['nombre']) && isset($data['direccion']) && isset($data['telefono'])) {
                 $password = md5($data['password']);
-                // Mensajes de depuración 
-                error_log("Email recibido: " . $data['email']);
-                 error_log("Password recibido (MD5): " . $password);
-                $query = 'INSERT INTO usuario (email, password, nombre, direccion, telefono, tipo) VALUES (:email, :password, :nombre, :direccion, :telefono, :tipo)';
+                $token = ''; // Crear el campo token vacío
+                $tipo = 'cliente'; //solo se pueden hacer desde el front clientes
+                $query = 'INSERT INTO usuario (email, password, nombre, direccion, telefono, tipo, token) VALUES (:email, :password, :nombre, :direccion, :telefono, :tipo, :token)';
                 $stmt = $conn->prepare($query);
                 $stmt->bindParam(':email', $data['email']);
-                $stmt->bindParam(':password', $data['password']);
+                $stmt->bindParam(':password', $password);
                 $stmt->bindParam(':nombre', $data['nombre']);
                 $stmt->bindParam(':direccion', $data['direccion']);
                 $stmt->bindParam(':telefono', $data['telefono']);
-                $stmt->bindParam(':tipo', $data['tipo']);
+                $stmt->bindParam(':tipo', $tipo);
+                $stmt->bindParam(':token', $token);
                 $stmt->execute();
                 echo json_encode(['message' => 'Usuario creado exitosamente']);
             } else {
                 http_response_code(400);
                 echo json_encode(['message' => 'Faltan parámetros en el cuerpo de la solicitud']);
             }
-        } catch (Exception $e) {
-            // Cabeceras de CORS en caso de error en POST 
-            header("Access-Control-Allow-Origin: *");
-            header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
-            header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization, token, cache-control");
-            header('Content-Type: application/json; charset=utf-8');
-            http_response_code(500);
-            echo json_encode(['error' => $e->getMessage()]);
-        }
-        exit();
+            break;
 
-    default:
-       // Cabeceras de CORS en caso de error en POST 
-       header("Access-Control-Allow-Origin: *");
-       header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
-       header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization, token, cache-control");
-       header('Content-Type: application/json; charset=utf-8');
-       http_response_code(405);
-       echo json_encode(['error' => $e->getMessage()]);
-        exit();
+        // Agrega otros casos según sea necesario
+
+        default:
+            http_response_code(400);
+            echo json_encode(['message' => 'Acción desconocida']);
+            break;
+    }
+} else {
+    http_response_code(405);
+    echo json_encode(['message' => 'Método no permitido']);
 }
+?>
