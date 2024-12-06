@@ -12,6 +12,7 @@ import { UsersService } from '../servicios/usuarios/usuarios-service';
 import { AuthService } from '../servicios/auth/auth.service';
 import { Usuario } from '../usuario/usuario';
 
+
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -25,14 +26,18 @@ export class HeaderComponent implements OnInit {
   private usersService = inject(UsersService); // servicios de los usuarios
   private router = inject(Router); // el enrutamiento
   private authService = inject(AuthService);
-
+  //Variables del carrito 
   closeResult = '';
   totalCompra: number = 0;
-
   productosCarrito: { producto: Producto; cantidad: number }[] = []; //array con los productos para el carrito
-
+ //Control del logeo para el pedido y usuario para el pedido
   loggedIn: boolean = false;
   currentUser?: Usuario | null = null;
+  // variables para lanzar alertas
+  showAlert: boolean = false
+  alertMessage: string | null = null;
+
+
 
   constructor() {}
   ngOnInit() {
@@ -57,8 +62,15 @@ export class HeaderComponent implements OnInit {
       console.log('Total de la compra:', this.totalCompra);
       // Aquí puedes implementar la llamada a la API para realizar el pedido
     } else {
-      console.log('Debe iniciar sesión para confirmar el pedido');
-      this.irALogin(); // Redirigir al login si no está logueado
+      
+      this.alertMessage="INICIA SESIÓN PARA CONFIRMAR PEDIDO"
+      this.showAlert=true;
+      setTimeout(()=>{
+        this.showAlert = false;
+         this.alertMessage = null;
+         this.irALogin(); // Redirigir al login si no está logueado
+      },2000)
+     
     }
   }
 
