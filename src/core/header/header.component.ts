@@ -12,7 +12,6 @@ import { UsersService } from '../servicios/usuarios/usuarios-service';
 import { AuthService } from '../servicios/auth/auth.service';
 import { Usuario } from '../usuario/usuario';
 
-
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -26,18 +25,18 @@ export class HeaderComponent implements OnInit {
   private usersService = inject(UsersService); // servicios de los usuarios
   private router = inject(Router); // el enrutamiento
   private authService = inject(AuthService);
-  //Variables del carrito 
+  //Variables del carrito
   closeResult = '';
   totalCompra: number = 0;
   productosCarrito: { producto: Producto; cantidad: number }[] = []; //array con los productos para el carrito
- //Control del logeo para el pedido y usuario para el pedido
+  //Control del logeo para el pedido y usuario para el pedido
   loggedIn: boolean = false;
   currentUser?: Usuario | null = null;
   // variables para lanzar alertas
-  showAlert: boolean = false
+  showAlert: boolean = false; // alerta de acción incorrecta
+  showAlert2: boolean = false; // alerta de acción correcta
   alertMessage: string | null = null;
-
-
+  alertMessage2: string | null = null;
 
   constructor() {}
   ngOnInit() {
@@ -57,20 +56,36 @@ export class HeaderComponent implements OnInit {
   hacePedido() {
     if (this.loggedIn && this.currentUser) {
       // Mostrar los datos del carrito en la consola
-      console.log('Pedido realizado por el usuario:', this.currentUser);
-      console.log('Productos en el carrito:', this.productosCarrito);
-      console.log('Total de la compra:', this.totalCompra);
+      // console.log('Pedido realizado por el usuario:', this.currentUser);
+      // console.log('Productos en el carrito:', this.productosCarrito);
+      // console.log('Total de la compra:', this.totalCompra);
       // Aquí puedes implementar la llamada a la API para realizar el pedido
+      this.carritoService.generarPedido(this.currentUser.id_usuario).subscribe(
+        (response) => {
+          console.log('EL PEDIDO HA SIDO CREADO:', JSON.stringify(response));
+          //limpio carro
+          this.carritoService.limpiarCarrito();
+          this.totalCompra = 0;
+          this.alertMessage2 = 'SU PEDIDO SE HA REALIZADO DE FORMA CORRECTA';
+          this.showAlert2 = true;
+          setTimeout(() => {
+            this.showAlert2 = false;
+            this.alertMessage2 = null;
+            this.router.navigate(['/']); //te mando al inicio despues de hacer le pedido de forma correcta
+          }, 2000);
+        },
+        (error) => {
+          console.error('Error al crear el pedido:', error);
+        }
+      );
     } else {
-      
-      this.alertMessage="INICIA SESIÓN PARA CONFIRMAR PEDIDO"
-      this.showAlert=true;
-      setTimeout(()=>{
+      this.alertMessage = 'INICIA SESIÓN PARA CONFIRMAR PEDIDO';
+      this.showAlert = true;
+      setTimeout(() => {
         this.showAlert = false;
-         this.alertMessage = null;
-         this.irALogin(); // Redirigir al login si no está logueado
-      },2000)
-     
+        this.alertMessage = null;
+        this.irALogin(); // Redirigir al login si no está logueado
+      }, 2000);
     }
   }
 
@@ -142,8 +157,8 @@ export class HeaderComponent implements OnInit {
     this.usersService.logout();
     this.currentUser = null; // borro el usuario
     this.loggedIn = false; //Estado del inicio de la sesion a false
-    this.productosCarrito=[]// vacio el carrito
-    this.totalCompra=0; // reinico el total 
+    this.productosCarrito = []; // vacio el carrito
+    this.totalCompra = 0; // reinico el total
     this.router.navigate(['/']);
   }
 }
