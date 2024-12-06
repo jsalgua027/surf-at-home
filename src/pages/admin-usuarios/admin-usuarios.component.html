@@ -16,7 +16,7 @@
                 <td>{{ usuario.email }}</td>
                 <td>{{ usuario.direccion }}</td>
                  <td>
-                   <button class="btn btn-dark" >Banear</button>
+                   <button class="btn btn-dark"  (click)="borrarUsuario(usuario.id_usuario)">Banear</button>
                  </td>
               </tr>
             </tbody>

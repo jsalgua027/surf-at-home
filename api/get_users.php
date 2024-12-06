@@ -91,7 +91,7 @@ if ($method == 'POST') {
             }
             break;
         case 'getUsers';
-        // Lógica para obtener todos los usuarios
+            // Lógica para obtener todos los usuarios
             try {
                 $query = 'SELECT * FROM usuario';
                 $stmt = $conn->prepare($query);
@@ -103,7 +103,25 @@ if ($method == 'POST') {
                 echo json_encode(['error' => $e->getMessage()]);
             }
             break;
-            // Agrega otros casos según sea necesario
+            case 'deleteUser':
+            // Lógica para eliminar un usuario
+            if (isset($data['id_usuario'])) {
+                $id_usuario = $data['id_usuario'];
+                try {
+                    $query = 'DELETE FROM usuario WHERE id_usuario = :id_usuario';
+                    $stmt = $conn->prepare($query);
+                    $stmt->bindParam(':id_usuario', $id_usuario, PDO::PARAM_INT);
+                    $stmt->execute();
+                    echo json_encode(['message' => 'Usuario eliminado exitosamente']);
+                } catch (Exception $e) {
+                    http_response_code(500);
+                    echo json_encode(['error' => $e->getMessage()]);
+                }
+            } else {
+                http_response_code(400);
+                echo json_encode(['message' => 'Falta el parámetro id_usuario']);
+            }
+            break;
 
         default:
             http_response_code(400);

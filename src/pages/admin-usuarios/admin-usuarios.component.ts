@@ -10,21 +10,34 @@ import { AdminUsuariosService } from '../../core/servicios/admin-usuarios/admin-
   standalone: true,
   imports: [FormsModule, CommonModule],
   templateUrl: './admin-usuarios.component.html',
-  styleUrl: './admin-usuarios.component.scss'
+  styleUrl: './admin-usuarios.component.scss',
 })
 export class AdminUsuariosComponent {
-  tipoUser=TipoUsuario;//tipo de usuario
-  listaUsuarios:Usuario[]=[] //array donde guardo los usuarios
-  private adminUsuariosService=inject(AdminUsuariosService); //injecto mi servicio
+  tipoUser = TipoUsuario; //tipo de usuario
+  listaUsuarios: Usuario[] = []; //array donde guardo los usuarios
+  private adminUsuariosService = inject(AdminUsuariosService); //injecto mi servicio
 
-  constructor(){}
+  constructor() {}
 
-  ngOnInit():void{
-    this.adminUsuariosService.getUsuarios()
-    .subscribe((datos:Usuario[])=>{
-      this.listaUsuarios=datos;
-      console.log("Los usuarios encontrados son: "+this.listaUsuarios)
-    })
+  ngOnInit(): void {
+    this.adminUsuariosService.getUsuarios().subscribe((datos: Usuario[]) => {
+      this.listaUsuarios = datos;
+      console.log('Los usuarios encontrados son: ' + this.listaUsuarios);
+    });
   }
 
+  borrarUsuario(id_usuario: number): void {
+    this.adminUsuariosService.borrarUsuario(id_usuario).subscribe(
+      (response) => {
+        console.log('Usuario borrado:', response);
+         // Actualizar la lista de usuarios 
+        this.listaUsuarios = this.listaUsuarios.filter(
+          (usuario) => usuario.id_usuario !== id_usuario
+        );
+      },
+      (error) => {
+        console.error('Error al borrar el usuario:', error);
+      }
+    );
+  }
 }
