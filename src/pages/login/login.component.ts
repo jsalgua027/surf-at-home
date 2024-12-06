@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { UsersService } from '../../core/servicios/usuarios/usuarios-service';
 
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -17,6 +18,7 @@ import { UsersService } from '../../core/servicios/usuarios/usuarios-service';
 export class LoginComponent {
   private router = inject(Router);
   private usuarioService = inject(UsersService);
+
 
   email: string = '';
   password: string = '';
@@ -42,7 +44,7 @@ export class LoginComponent {
              
         // Guardo el Token
         this.usuarioService.saveTokenWithDate(response.token);
-
+       
         //gestiono el tipo de usuario
         if (response.tipo === 'administrador') {
           this.router.navigate(['/admin']);

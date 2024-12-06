@@ -36,6 +36,7 @@ export class ProductosComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.id_categoria = +params['idCategoria'];
       this.cargarProductos();
+     
     });
     this.searchTerm.valueChanges.pipe(//filto de busqueda
       debounceTime(500),
