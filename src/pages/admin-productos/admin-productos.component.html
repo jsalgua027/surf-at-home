@@ -133,7 +133,7 @@
             </button>
           </td>
           <td>
-            <button class="btn btn-danger" (click)="open('autofocus')">
+            <button class="btn btn-danger" (click)="open(articulo.id_producto)">
               Borrar
             </button>
           </td>
@@ -162,7 +162,7 @@
       >
         Cancelar
       </button>
-      <button type="button" class="btn btn-danger" (click)="confirmDelete()">
+      <button type="button" class="btn btn-danger" (click)="confirmDelete(modal)">
         Eliminar
       </button>
     </div>

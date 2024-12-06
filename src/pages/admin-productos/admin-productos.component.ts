@@ -11,7 +11,7 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-admin-productos',
   standalone: true,
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './admin-productos.component.html',
   styleUrl: './admin-productos.component.scss',
 })
@@ -23,7 +23,7 @@ export class AdminProductosComponent implements OnInit {
   private adminProductosService = inject(AdminProductosComponentService); // servicios del admin product
   private router = inject(Router); // para rediriguir al componente que quiero
 
-  // variable para crear productos 
+  // variable para crear productos
   nuevoProducto: Producto = {
     id_producto: '',
     marca_producto: '',
@@ -34,8 +34,7 @@ export class AdminProductosComponent implements OnInit {
     descripcion: '',
   };
   imagenes: FileList | null = null;
-
-
+  productoParaEliminar: number | null = null;
 
   @ViewChild('modalContent', { static: true }) modalContent: any;
 
@@ -68,25 +67,11 @@ export class AdminProductosComponent implements OnInit {
     }
   }
 
-  // gestión de la modal de confirmación de borrado
-  open(id: string) {
-    const modalRef = this.modalService.open(this.modalContent);
-    modalRef.result.then(
-      (result) => {
-        if (result === 'Eliminar') {
-          this.confirmDelete();
-        }
-      },
-      (reason) => {
-        console.log('Modal dismissed', reason);
-      }
-    );
-  }
+ 
 
   editarProducto(id: string) {
     this.router.navigate(['/editar-producto', id]);
   }
-  confirmDelete() {}
 
   //GESTIÓN DE LA CREACIÓN DE PRODUCTOS
 
@@ -126,6 +111,43 @@ export class AdminProductosComponent implements OnInit {
       );
     } else {
       console.error('No se seleccionaron imágenes.');
+    }
+  }
+
+  /******GESTIÓN DEL BORRADO*****/
+
+
+   // gestión de la modal de confirmación de borrado
+   open(id: string) {
+    this.productoParaEliminar = parseInt(id, 10);
+    const modalRef = this.modalService.open(this.modalContent);
+    modalRef.result.then(
+      (result) => {
+        if (result === 'Eliminar') {
+          this.confirmDelete(modalRef);
+        }
+      },
+      (reason) => {
+        console.log('Modal dismissed', reason);
+      }
+    );
+  }
+
+  confirmDelete(modalRef: any) {
+    if (this.productoParaEliminar !== null) {
+      this.adminProductosService
+        .eliminarProducto(this.productoParaEliminar)
+        .subscribe(
+          (response) => {
+            console.log('Producto eliminado:', response);
+            this.actualizarFiltroArticulos(); // Actualizar el filtro después de eliminar un producto
+            modalRef.close();
+          },
+          (error) => {
+            console.error('Error al eliminar el producto:', error);
+          }
+        );
+      this.productoParaEliminar = null;
     }
   }
 }

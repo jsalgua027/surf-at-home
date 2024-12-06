@@ -43,7 +43,7 @@ export class AdminProductosComponentService {
         const nuevoProducto: Producto = {
           ...producto,
           id_producto: response.id_producto, //la api devuelve el id por lo crea la base de datos
-          foto_producto: response.foto_producto // y la ruta tambien que se crea a nivel de api 
+          foto_producto: response.foto_producto, // y la ruta tambien que se crea a nivel de api
         };
         this.productosSubject.next([...productosActuales, nuevoProducto]);
       }),
@@ -52,5 +52,26 @@ export class AdminProductosComponentService {
         return throwError(error);
       })
     );
+  }
+
+  eliminarProducto(id_producto: number): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+    };
+    return this.http
+      .delete<any>(`${this.apiUrl}?id_producto=${id_producto}`, httpOptions)
+      .pipe(
+        tap(() => {
+          const idProductoString = id_producto.toString();
+          const productosActuales = this.productosSubject.value.filter(
+            (producto) => producto.id_producto.toString() !== idProductoString
+          );
+          this.productosSubject.next(productosActuales);
+        }),
+        catchError((error) => {
+          console.error('Error al eliminar el producto:', error);
+          return throwError(error);
+        })
+      );
   }
 }

@@ -103,12 +103,17 @@ switch ($method) {
 
     case 'DELETE':
         try {
-            $data = json_decode(file_get_contents('php://input'), true);
-            $query = 'DELETE FROM producto WHERE id_producto = :id_producto';
-            $stmt = $conn->prepare($query);
-            $stmt->bindParam(':id_producto', $data['id_producto']);
-            $stmt->execute();
-            echo json_encode(['message' => 'Producto eliminado exitosamente']);
+            if (isset($_GET['id_producto'])) {
+                $id_producto = $_GET['id_producto'];
+                $query = 'DELETE FROM producto WHERE id_producto = :id_producto';
+                $stmt = $conn->prepare($query);
+                $stmt->bindParam(':id_producto', $id_producto, PDO::PARAM_INT);
+                $stmt->execute();
+                echo json_encode(['message' => 'Producto eliminado exitosamente']);
+            } else {
+                http_response_code(400);
+                echo json_encode(['error' => 'ID de producto no proporcionado']);
+            }
         } catch (Exception $e) {
             http_response_code(500);
             echo json_encode(['error' => $e->getMessage()]);
