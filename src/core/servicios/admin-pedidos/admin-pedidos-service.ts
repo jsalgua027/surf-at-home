@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { PEDIDOS_MOCK } from '../../../mocks/pedidos-mock';
-import { PEDIDOS_PRODUCTOS_MOCK } from '../../../mocks/pedido-producto';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 import { Pedido } from '../../pedido/pedido';
 import { PedidoProducto } from '../../pedido-producto/pedido-producto';
 
@@ -9,16 +9,22 @@ import { PedidoProducto } from '../../pedido-producto/pedido-producto';
   providedIn: 'root',
 })
 export class AdminPedidosComponentService {
+  private apiUrl = 'http://localhost/Proyectos/surf-at-home/api/get_orders.php'; // Asegúrate de actualizar esta URL según sea necesario
+  private http = inject(HttpClient);
   private pedidoSubject: BehaviorSubject<Pedido[]> = new BehaviorSubject<
     Pedido[]
-  >(PEDIDOS_MOCK);
+  >([]);
   private pedidoProductoSubject: BehaviorSubject<PedidoProducto[]> =
-    new BehaviorSubject<PedidoProducto[]>(PEDIDOS_PRODUCTOS_MOCK);
+    new BehaviorSubject<PedidoProducto[]>([]);
 
   constructor() {}
 
   getPedidos(): Observable<Pedido[]> {
-    return this.pedidoSubject.asObservable();
+    this.http.get<Pedido[]>(`${this.apiUrl}`).subscribe(pedidos => {
+       this.pedidoSubject.next(pedidos);
+       }, error => { console.error('Error al obtener los pedidos:', error); 
+        
+       }); return this.pedidoSubject.asObservable();
   }
 
   getPedidosProducto(): Observable<PedidoProducto[]> {
