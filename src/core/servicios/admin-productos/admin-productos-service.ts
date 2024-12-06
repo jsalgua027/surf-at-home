@@ -22,6 +22,8 @@ export class AdminProductosComponentService {
 
   constructor(private productoService: ProductoService) {}
 
+  /*GSTIÓN PARA LAS TABLAS*/
+
   getCategorias(): Observable<Categoria[]> {
     return this.categoriasSubject.asObservable();
   }
@@ -31,6 +33,9 @@ export class AdminProductosComponentService {
   getProductosPorCategoria(idCategoria: number): Observable<Producto[]> {
     return this.productoService.getProductosPorCategoriaApi(idCategoria);
   }
+
+  /**GESTIÓN PARA LAS LLAMADAS A LA API  */
+
 
   agregarProducto(producto: Producto): Observable<any> {
     const httpOptions = {

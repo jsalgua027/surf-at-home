@@ -47,6 +47,8 @@ export class AdminProductosComponent implements OnInit {
     this.articulosFiltrados = []; // en la primera carga quiero el array vacio
   }
 
+  /**GESTIÓN PARA MOSTRAR LOS DATOS DE LA TABLA******/
+
   //gestion de imagenes
   getProductoFotoUrl(producto: Producto): string {
     return `../../assets/Productos/${producto.foto_producto}`;
@@ -66,14 +68,12 @@ export class AdminProductosComponent implements OnInit {
       this.articulosFiltrados = [];
     }
   }
-
- 
-
+  //Método que nos lleva a editar producto
   editarProducto(id: string) {
     this.router.navigate(['/editar-producto', id]);
   }
 
-  //GESTIÓN DE LA CREACIÓN DE PRODUCTOS
+  /**GESTIÓN DE LA CREACIÓN DE PRODUCTOS   CON LOS SERVICOS ****/
 
   // filtro de productos según categoría
   actualizarFiltroArticulos(): void {
@@ -114,11 +114,10 @@ export class AdminProductosComponent implements OnInit {
     }
   }
 
-  /******GESTIÓN DEL BORRADO*****/
+  /******GESTIÓN DEL BORRADO DE PRODUCTOS CON SERVICO *****/
 
-
-   // gestión de la modal de confirmación de borrado
-   open(id: string) {
+  // gestión de la modal de confirmación de borrado
+  open(id: string) {
     this.productoParaEliminar = parseInt(id, 10);
     const modalRef = this.modalService.open(this.modalContent);
     modalRef.result.then(
