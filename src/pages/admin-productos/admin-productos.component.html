@@ -1,12 +1,12 @@
 <div class="contenedor-productos">
-  <form class="formulario">
+  <form class="formulario" (ngSubmit)="agregarProducto()">
     <div class="form-group">
       <label for="marca">Marca</label>
       <input
         type="text"
         id="marca"
-        name="marca"
-        ngModel
+        name="marca_producto"
+        [(ngModel)]="nuevoProducto.marca_producto"
         required
         class="form-control"
       />
@@ -17,7 +17,7 @@
         type="text"
         id="descripcion"
         name="descripcion"
-        ngModel
+        [(ngModel)]="nuevoProducto.descripcion"
         required
         class="form-control"
       />
@@ -28,6 +28,7 @@
         type="text"
         id="precio"
         name="precio"
+        [(ngModel)]="nuevoProducto.precio"
         ngModel
         required
         class="form-control"
@@ -37,18 +38,16 @@
       <label for="categoria">Categoría</label>
       <select
         id="categoria"
-        name="categoria"
-        ngModel
+        name="id_categoria"
+        [(ngModel)]="nuevoProducto.id_categoria"
         required
         class="form-control"
       >
         <option value="" disabled selected>Selecciona una categoría</option>
-        <option
-          *ngFor="let categoria of categorias"
-          [value]="categoria.id_categoria"
-        >
-          {{ categoria.nombre_categoria }}
-        </option>
+        <option value="1">SURF</option>
+        <option value="2">BODYBOARD</option>
+        <option value="3">SKATE</option>
+        <option value="4">NEOPRENOS</option>
       </select>
     </div>
     <div class="form-group">
@@ -57,7 +56,7 @@
         type="text"
         id="stock"
         name="stock"
-        ngModel
+        [(ngModel)]="nuevoProducto.stock"
         required
         class="form-control"
       />
@@ -69,10 +68,11 @@
         id="imagenes"
         name="imagenes"
         multiple
+        (change)="onFileChange($event)"
         class="form-control"
       />
     </div>
-    <button type="button" class="btn btn-dark black-button">
+    <button type="submit" class="btn btn-dark black-button">
       Agregar Producto
     </button>
   </form>
@@ -95,7 +95,7 @@
       <option value="4">NEOPRENOS</option>
     </select>
   </div>
- 
+
   <div class="table-responsive" *ngIf="articulosFiltrados.length > 0">
     <h3>Artículos</h3>
     <table class="table table-striped">
@@ -123,7 +123,7 @@
           <td>{{ articulo.marca_producto }}</td>
           <td>{{ articulo.descripcion }}</td>
           <td>{{ articulo.stock }}</td>
-          <td>{{ articulo.precio  }}</td>
+          <td>{{ articulo.precio }}</td>
           <td>
             <button
               class="btn btn-primary"

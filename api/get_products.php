@@ -25,8 +25,14 @@ if ($method == "OPTIONS") {
     exit();
 }
 
+// Función para generar la ruta de la imagen del producto
+function generarRutaImagen($categoria, $tipo, $modelo, $nombreArchivo)
+{
+    return $categoria . '/' . $tipo . '/' . $modelo . '/' . $nombreArchivo;
+}
+
 // Manejar diferentes métodos HTTP
-switch($method) {
+switch ($method) {
     case 'GET':
         try {
             if (isset($_GET['categoria'])) {
@@ -36,9 +42,9 @@ switch($method) {
                 $stmt->bindParam(':categoria', $categoria, PDO::PARAM_INT);
             } else {
                 $query = 'SELECT * FROM producto';
-            $stmt = $conn->prepare($query);
+                $stmt = $conn->prepare($query);
             }
-                    
+
             $stmt->execute();
             $productos = $stmt->fetchAll(PDO::FETCH_ASSOC);
             echo json_encode($productos);
@@ -51,12 +57,12 @@ switch($method) {
     case 'POST':
         try {
             $data = json_decode(file_get_contents('php://input'), true);
-            $query = 'INSERT INTO producto (marca_producto, precio, foto_producto, id_categoria, stock, descripcion) 
-                      VALUES (:marca_producto, :precio, :foto_producto, :id_categoria, :stock, :descripcion)';
+            $rutaImagen = generarRutaImagen($data['categoria'], $data['tipo'], $data['modelo'], $data['nombreArchivo']);
+            $query = 'INSERT INTO producto (marca_producto, precio, foto_producto, id_categoria, stock, descripcion) VALUES (:marca_producto, :precio, :foto_producto, :id_categoria, :stock, :descripcion)';
             $stmt = $conn->prepare($query);
             $stmt->bindParam(':marca_producto', $data['marca_producto']);
             $stmt->bindParam(':precio', $data['precio']);
-            $stmt->bindParam(':foto_producto', $data['foto_producto']);
+            $stmt->bindParam(':foto_producto', $rutaImagen);
             $stmt->bindParam(':id_categoria', $data['id_categoria']);
             $stmt->bindParam(':stock', $data['stock']);
             $stmt->bindParam(':descripcion', $data['descripcion']);
@@ -114,4 +120,3 @@ switch($method) {
         echo json_encode(['message' => 'Método no permitido']);
         exit();
 }
-?>
