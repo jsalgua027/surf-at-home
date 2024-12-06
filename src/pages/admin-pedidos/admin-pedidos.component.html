@@ -39,9 +39,9 @@
           <td>{{ pedido.fecha | date }}</td>
           <td>{{ pedido.estado_pedido }}</td>
           <td>{{ pedido.id_usuario }}</td>
-          <td>{{ pedido.total | currency }}</td>
+          <td>{{ pedido.total | currency :'EUR' }}</td>
           <td>
-             <button class="btn btn-dark" *ngIf="pedido.estado_pedido === estadoPedido.pendiente"> Entregar </button> </td>
+             <button (click)="completarPedido(pedido.id_pedido)" class="btn btn-dark" *ngIf="pedido.estado_pedido === estadoPedido.pendiente"> Entregar </button> </td>
         </tr>
       </tbody>
     </table>

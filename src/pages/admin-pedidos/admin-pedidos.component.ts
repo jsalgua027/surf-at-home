@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 import { Pedido } from '../../core/pedido/pedido';
 import { EstadoPedido } from '../../core/enums/estado-pedido';
 
-
 @Component({
   selector: 'app-admin-pedidos',
   standalone: true,
@@ -36,5 +35,24 @@ export class AdminPedidosComponent implements OnInit {
     } else {
       this.filteredPedidos = this.pedidos; // Si no hay categoría seleccionada, mostramos todos los pedidos
     }
+  }
+
+  //método para cambiar el estado del pedido a completado
+  completarPedido(id_pedido: number): void {
+    this.adminPedidosService.cambiarEstadoPedido(id_pedido).subscribe(
+      (response) => {
+        console.log('Pedido completado:', response);
+        // Actualizar el estado del pedido en el array
+        this.pedidos = this.pedidos.map((pedido) =>
+          pedido.id_pedido === id_pedido
+            ? { ...pedido, estado_pedido: EstadoPedido.completado }
+            : pedido
+        );
+        this.filteredPedidos = this.pedidos; // Actualizar la lista filtrada
+      },
+      (error) => {
+        console.error('Error al completar el pedido:', error);
+      }
+    );
   }
 }

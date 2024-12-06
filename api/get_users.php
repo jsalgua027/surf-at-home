@@ -26,14 +26,15 @@ if ($method == "OPTIONS") {
 }
 
 // Función para generar un token
-function generateToken() {
+function generateToken()
+{
     return bin2hex(random_bytes(16));
 }
 
 // Lógica para manejar las solicitudes POST
 if ($method == 'POST') {
     $data = json_decode(file_get_contents('php://input'), true);
-    
+
     if (!isset($data['action'])) {
         http_response_code(400);
         echo json_encode(['message' => 'Acción no especificada']);
@@ -41,7 +42,7 @@ if ($method == 'POST') {
     }
 
     $action = $data['action'];
-    
+
     switch ($action) {
         case 'login':
             // Lógica para obtener datos del usuario (logueo)
@@ -89,8 +90,20 @@ if ($method == 'POST') {
                 echo json_encode(['message' => 'Faltan parámetros en el cuerpo de la solicitud']);
             }
             break;
-
-        // Agrega otros casos según sea necesario
+        case 'getUsers';
+        // Lógica para obtener todos los usuarios
+            try {
+                $query = 'SELECT * FROM usuario';
+                $stmt = $conn->prepare($query);
+                $stmt->execute();
+                $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                echo json_encode($users);
+            } catch (Exception $e) {
+                http_response_code(500);
+                echo json_encode(['error' => $e->getMessage()]);
+            }
+            break;
+            // Agrega otros casos según sea necesario
 
         default:
             http_response_code(400);
@@ -101,4 +114,3 @@ if ($method == 'POST') {
     http_response_code(405);
     echo json_encode(['message' => 'Método no permitido']);
 }
-?>

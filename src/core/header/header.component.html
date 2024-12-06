@@ -74,7 +74,7 @@
                     <div class="card-carrito-datos">
                         <h5 class="card-title">{{ item.producto.marca_producto }}</h5>
                         <p class="card-text">{{ item.producto.descripcion }}</p>
-                        <p class="card-price">{{ item.producto.precio | currency }}</p>
+                        <p class="card-price">{{ item.producto.precio | currency:'EUR' }}</p>
                     </div>
                 </div>
                 <div class="card-botones-cantidad">
@@ -89,7 +89,7 @@
             </div>
             <div class="text-end">
                 <div class="total-pedido">
-                    <h4>Total: {{ totalCompra | currency }}</h4>
+                    <h4>Total: {{ totalCompra | currency:'EUR' }}</h4>
                 </div>
                 <button type="button" class="btn btn-outline-secondary"
                     (click)="offcanvas.close('Close click'); hacePedido();" >Confirmar Pedido</button>

@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Pedido } from '../../pedido/pedido';
@@ -11,11 +11,8 @@ import { PedidoProducto } from '../../pedido-producto/pedido-producto';
 export class AdminPedidosComponentService {
   private apiUrl = 'http://localhost/Proyectos/surf-at-home/api/get_orders.php'; // Asegúrate de actualizar esta URL según sea necesario
   private http = inject(HttpClient);
-  private pedidoSubject: BehaviorSubject<Pedido[]> = new BehaviorSubject<
-    Pedido[]
-  >([]);
-  private pedidoProductoSubject: BehaviorSubject<PedidoProducto[]> =
-    new BehaviorSubject<PedidoProducto[]>([]);
+  private pedidoSubject: BehaviorSubject<Pedido[]> = new BehaviorSubject<Pedido[]>([]);
+  private pedidoProductoSubject: BehaviorSubject<PedidoProducto[]> =new BehaviorSubject<PedidoProducto[]>([]);
 
   constructor() {}
 
@@ -37,4 +34,15 @@ export class AdminPedidosComponentService {
   updatePedidosProducto(pedidosProducto: PedidoProducto[]): void {
     this.pedidoProductoSubject.next(pedidosProducto);
   }
+  
+  //metodo que cambia el estado del pedido
+  cambiarEstadoPedido(id_pedido: number): Observable<any> { 
+    const body = { id_pedido }; 
+    const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+     return this.http.put<any>(`${this.apiUrl}`, body, httpOptions).pipe(
+       catchError(error => { console.error('Error al cambiar el estado del pedido:', error); 
+        return throwError(error); }) 
+      ); 
+    }
+
 }

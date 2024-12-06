@@ -84,9 +84,10 @@ switch ($method) {
         // Cambiar el estado de un pedido
         try {
             $data = json_decode(file_get_contents('php://input'), true);
+            $estado_pedido = EstadoPedido::COMPLETADO;
             $query = 'UPDATE pedido SET estado_pedido = :estado_pedido WHERE id_pedido = :id_pedido';
             $stmt = $conn->prepare($query);
-            $stmt->bindParam(':estado_pedido', $data['estado_pedido']);
+            $stmt->bindParam(':estado_pedido', $estado_pedido);
             $stmt->bindParam(':id_pedido', $data['id_pedido']);
             $stmt->execute();
             echo json_encode(['message' => 'Estado del pedido actualizado exitosamente']);

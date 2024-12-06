@@ -95,21 +95,7 @@
       <option value="4">NEOPRENOS</option>
     </select>
   </div>
-  <!--
-   <div class="lista-articulos" *ngIf="articulosFiltrados.length > 0">
-    <h3>Artículos</h3>
-    <ul>
-      <li *ngFor="let articulo of articulosFiltrados">
-        <div class="contendor-producto-filtrado">
-          <div class="imagen">{{ articulo.foto_producto }}</div>
-          <div class="marca">{{ articulo.marca_producto }}</div>
-          <div class="descrip">{{ articulo.descripcion }}</div>
-          <div class="stock">{{ articulo.stock }}</div>
-        </div>
-      </li>
-    </ul>
-  </div>
-  -->
+ 
   <div class="table-responsive" *ngIf="articulosFiltrados.length > 0">
     <h3>Artículos</h3>
     <table class="table table-striped">
@@ -119,6 +105,7 @@
           <th scope="col">Marca</th>
           <th scope="col">Descripción</th>
           <th scope="col">Stock</th>
+          <th scope="col">PVP</th>
           <th scope="col">#</th>
           <th scope="col">#</th>
         </tr>
@@ -136,6 +123,7 @@
           <td>{{ articulo.marca_producto }}</td>
           <td>{{ articulo.descripcion }}</td>
           <td>{{ articulo.stock }}</td>
+          <td>{{ articulo.precio  }}</td>
           <td>
             <button
               class="btn btn-primary"

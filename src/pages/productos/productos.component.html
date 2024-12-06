@@ -8,7 +8,7 @@
             <div class="card-body">
                 <h5 class="card-title">{{ producto.marca_producto }}</h5>
                 <p class="card-text">{{ producto.descripcion }}</p>
-                <p class="card-price">{{ producto.precio | currency }}</p>
+                <p class="card-price">{{ producto.precio | currency:'EUR' }}</p>
                 <button (click)="agregarAlCarrito(producto)" class="btn btn-primary">Añadir al Carrito</button>
             </div>
         </div>
