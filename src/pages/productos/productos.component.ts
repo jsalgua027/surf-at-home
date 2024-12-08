@@ -1,6 +1,6 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { Producto } from '../../core/producto/producto';
-import { PRODUCTOS_MOCK } from '../../mocks/productos-mock';
+
 import { Categoria } from '../../core/categoria/categoria';
 import { ProductoService } from '../../core/servicios/productos/serv-productos';
 import { CommonModule } from '@angular/common';

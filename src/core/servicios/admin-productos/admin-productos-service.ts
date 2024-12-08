@@ -9,18 +9,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root',
 })
 export class AdminProductosComponentService {
-  private categoriasSubject: BehaviorSubject<Categoria[]> = new BehaviorSubject<
-    Categoria[]
-  >([]);
-  private productosSubject: BehaviorSubject<Producto[]> = new BehaviorSubject<
-    Producto[]
-  >([]);
+  private categoriasSubject: BehaviorSubject<Categoria[]> = new BehaviorSubject<Categoria[]>([]);
+  private productosSubject: BehaviorSubject<Producto[]> = new BehaviorSubject<Producto[]>([]);
+  private productoSeleccionado: BehaviorSubject<Producto |null> = new BehaviorSubject<Producto | null>(null);
 
   private apiUrl =
     'http://localhost/Proyectos/surf-at-home/api/get_products.php';
   private http = inject(HttpClient);
 
-  constructor(private productoService: ProductoService) {}
+  constructor(private productoService: ProductoService) { }
 
   /*GSTIÓN PARA LAS TABLAS*/
 
@@ -40,13 +37,16 @@ export class AdminProductosComponentService {
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
     };
-      console.log("el dato que recibe el servicio agregarProcuto es:" +JSON.stringify(productoData))
+    console.log(
+      'el dato que recibe el servicio agregarProcuto es:' +
+      JSON.stringify(productoData)
+    );
     return this.http.post<any>(this.apiUrl, productoData).pipe(
-            tap((response) => {
+      tap((response) => {
         const productosActuales = this.productosSubject.value;
         const nuevoProducto = {
           id_producto: response.id_producto,
-          marca_producto: response.marca_producto, 
+          marca_producto: response.marca_producto,
           precio: response.precio,
           foto_producto: response.foto_producto,
           id_categoria: response.id_categoria,
@@ -81,5 +81,19 @@ export class AdminProductosComponentService {
           return throwError(error);
         })
       );
+  }
+
+  /**GESTIÓN PARA PASAR LOS DATOS DEL PRODUCTO AL COMPONENTE ADMIN-EDITAR-PRODUCTS */
+
+  seleccionarProducto(producto: Producto) {
+    this.productoSeleccionado.next(producto);
+  }
+  obtenerProductoSeleccionado() {
+    return this.productoSeleccionado.asObservable();
+  }
+
+  limpiarProductoSeleccionado() {
+    this.productoSeleccionado.next(null);
+
   }
 }

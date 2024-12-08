@@ -6,7 +6,7 @@
         type="text"
         id="marca"
         name="marca"
-        ngModel
+        [value]="producto?.marca_producto"
         required
         class="form-control"
       />
@@ -17,7 +17,7 @@
         type="text"
         id="descripcion"
         name="descripcion"
-        ngModel
+        [value]="producto?.descripcion"
         required
         class="form-control"
       />
@@ -25,22 +25,21 @@
     <div class="form-group">
       <label for="precio">Precio</label>
       <input
-        type="text"
+        type="number"
         id="precio"
         name="precio"
-        ngModel
+        [value]="producto?.precio"
         required
         class="form-control"
       />
     </div>
- 
     <div class="form-group">
       <label for="stock">Stock</label>
       <input
-        type="text"
+        type="number"
         id="stock"
         name="stock"
-        ngModel
+        [value]="producto?.stock"
         required
         class="form-control"
       />
@@ -51,15 +50,16 @@
         type="file"
         id="imagenes"
         name="imagenes"
+        (change)="onFileChange($event)"
         multiple
         class="form-control"
       />
     </div>
-    <button type="button" class="btn btn-dark black-button m-2">
+    <button type="button" class="btn btn-dark black-button m-2" (click)="guardarCambios()">
       Editar
     </button>
     <button type="button" (click)="volver()" class="btn btn-primary black-button m-2">
-        Cancelar
-      </button>
+      Cancelar
+    </button>
   </form>
 </div>

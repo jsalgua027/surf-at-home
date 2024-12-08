@@ -20,7 +20,7 @@ export class AdminProductosComponent implements OnInit {
   categorias: Categoria[] = []; //array de categorias
   articulosFiltrados: Producto[] = []; // array de productos flitrados  para la tabla
   categoriaSeleccionada: number | null = null; // selector de categorias
-  private productosService = inject(ProductoService);
+ // private productosService = inject(ProductoService);
   private adminProductosService = inject(AdminProductosComponentService); // servicios del admin product
   private router = inject(Router); // para rediriguir al componente que quiero
 
@@ -71,8 +71,9 @@ export class AdminProductosComponent implements OnInit {
     }
   }
   //Método que nos lleva a editar producto
-  editarProducto(id: string) {
-    this.router.navigate(['/editar-producto', id]);
+  editarProducto(producto: Producto) {
+    this.adminProductosService.seleccionarProducto(producto)
+    this.router.navigate(['/editar-producto', producto.id_producto]);
   }
 
   /**GESTIÓN DE LA CREACIÓN DE PRODUCTOS   CON LOS SERVICOS ****/
