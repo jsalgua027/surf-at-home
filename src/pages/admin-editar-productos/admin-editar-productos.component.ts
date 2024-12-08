@@ -15,7 +15,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './admin-editar-productos.component.scss',
 })
 export class AdminEditarProductosComponent {
-  private editarServicios = inject(AdminEditarProductosService); // injecto los servicios de editar
+  private editarProductosService = inject(AdminEditarProductosService); // injecto los servicios de editar
   idProducto: string = '';
   producto: Producto | null = null;
   imagenes: FileList | null = null;
@@ -33,7 +33,7 @@ export class AdminEditarProductosComponent {
           this.producto = producto;
           console.log(
             'el producto que te traes del admin-protuc es:' +
-              JSON.stringify(producto,null,2)
+              JSON.stringify(producto, null, 2)
           );
         } else {
           console.error('Producto no encontrado o ID no coincide.');
@@ -48,18 +48,43 @@ export class AdminEditarProductosComponent {
   guardarCambios() {
     if (this.producto) {
       // Actualizar manualmente los valores
-      const marcaInput = (document.getElementById('marca') as HTMLInputElement).value;
-      const descripcionInput = (document.getElementById('descripcion') as HTMLInputElement).value;
-      const precioInput = +(document.getElementById('precio') as HTMLInputElement).value;
-      const stockInput = +(document.getElementById('stock') as HTMLInputElement).value;
+      const marcaInput = (document.getElementById('marca') as HTMLInputElement)
+        .value;
+      const descripcionInput = (
+        document.getElementById('descripcion') as HTMLInputElement
+      ).value;
+      const precioInput = +(
+        document.getElementById('precio') as HTMLInputElement
+      ).value;
+      const stockInput = +(document.getElementById('stock') as HTMLInputElement)
+        .value;
       this.producto.marca_producto = marcaInput;
       this.producto.descripcion = descripcionInput;
       this.producto.precio = precioInput;
       this.producto.stock = stockInput;
-      console.log('Producto editado:', this.producto);
-      console.log('Imágenes seleccionadas:', this.imagenes); // Lógica para guardar los cambios y las imágenes
-    }
+      // creo FormData para mandarlos
+      const formData = new FormData();
+      formData.append('id_producto', this.producto.id_producto.toString());
+      formData.append('marca_producto', this.producto.marca_producto);
+      formData.append('precio', this.producto.precio.toString());
+      formData.append('id_categoria', this.producto.id_categoria.toString());
+      formData.append('stock', this.producto.stock.toString());
+      formData.append('descripcion', this.producto.descripcion);
 
+      //LLamo al servicio de admin-editar-produtos
+      const archivo = this.imagenes ? this.imagenes[0] : undefined;
+      this.editarProductosService
+        .actualizarProducto(formData)
+        .subscribe(
+          (response) => {
+            console.log('Producto actualizado:', response);
+          },
+          (error) => {
+            console.error('Error al actualizar el producto:', error);
+          }
+        );
+    }
+    this.rutas.navigate(['/admin']);
   }
 
   volver() {
