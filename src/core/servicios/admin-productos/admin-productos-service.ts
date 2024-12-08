@@ -36,19 +36,22 @@ export class AdminProductosComponentService {
 
   /**GESTIÓN PARA LAS LLAMADAS A LA API  */
 
-
-  agregarProducto(producto: Producto): Observable<any> {
+  agregarProducto(productoData: FormData): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
     };
-
-    return this.http.post<any>(this.apiUrl, producto, httpOptions).pipe(
-      tap((response) => {
+      console.log("el dato que recibe el servicio agregarProcuto es:" +JSON.stringify(productoData))
+    return this.http.post<any>(this.apiUrl, productoData).pipe(
+            tap((response) => {
         const productosActuales = this.productosSubject.value;
-        const nuevoProducto: Producto = {
-          ...producto,
-          id_producto: response.id_producto, //la api devuelve el id por lo crea la base de datos
-          foto_producto: response.foto_producto, // y la ruta tambien que se crea a nivel de api
+        const nuevoProducto = {
+          id_producto: response.id_producto,
+          marca_producto: response.marca_producto, 
+          precio: response.precio,
+          foto_producto: response.foto_producto,
+          id_categoria: response.id_categoria,
+          stock: response.stock,
+          descripcion: response.descripcion,
         };
         this.productosSubject.next([...productosActuales, nuevoProducto]);
       }),

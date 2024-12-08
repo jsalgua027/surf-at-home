@@ -26,9 +26,10 @@ if ($method == "OPTIONS") {
 }
 
 // Función para generar la ruta de la imagen del producto
-function generarRutaImagen($categoria, $tipo, $modelo, $nombreArchivo)
+function generarRutaImagen($categoria, $nombreArchivo)
 {
-    return $categoria . '/' . $tipo . '/' . $modelo . '/' . $nombreArchivo;
+   
+    return  $categoria . '/' . $nombreArchivo;
 }
 
 // Manejar diferentes métodos HTTP
@@ -55,22 +56,51 @@ switch ($method) {
         exit();
 
     case 'POST':
-        try {
-            $data = json_decode(file_get_contents('php://input'), true);
-            $rutaImagen = generarRutaImagen($data['categoria'], $data['tipo'], $data['modelo'], $data['nombreArchivo']);
-            $query = 'INSERT INTO producto (marca_producto, precio, foto_producto, id_categoria, stock, descripcion) VALUES (:marca_producto, :precio, :foto_producto, :id_categoria, :stock, :descripcion)';
-            $stmt = $conn->prepare($query);
-            $stmt->bindParam(':marca_producto', $data['marca_producto']);
-            $stmt->bindParam(':precio', $data['precio']);
-            $stmt->bindParam(':foto_producto', $rutaImagen);
-            $stmt->bindParam(':id_categoria', $data['id_categoria']);
-            $stmt->bindParam(':stock', $data['stock']);
-            $stmt->bindParam(':descripcion', $data['descripcion']);
-            $stmt->execute();
-            echo json_encode(['message' => 'Producto agregado exitosamente']);
+        try { // Capturar los datos del formulario
+            $data = $_POST;
+            // Capturar el archivo enviado
+            if (isset($_FILES['file'])) {
+                $archivo = $_FILES['file'];
+                $nombreArchivo = $archivo['name'];
+
+                // Generar la ruta de la imagen
+                $categoria = $data['id_categoria'];
+                $rutaImagen = generarRutaImagen($categoria, $nombreArchivo);
+                // Insertar el producto en la base de datos
+                $query = 'INSERT INTO producto (marca_producto, precio, foto_producto, id_categoria, stock, descripcion) VALUES (:marca_producto, :precio, :foto_producto, :id_categoria, :stock, :descripcion)';
+                $stmt = $conn->prepare($query);
+                $stmt->bindParam(':marca_producto', $data['marca_producto']);
+                $stmt->bindParam(':precio', $data['precio']);
+                $stmt->bindParam(':foto_producto', $rutaImagen);
+                $stmt->bindParam(':id_categoria', $data['id_categoria']);
+                $stmt->bindParam(':stock', $data['stock']);
+                $stmt->bindParam(':descripcion', $data['descripcion']);
+                $stmt->execute();
+
+                // Mover el archivo a la carpeta correspondiente después de la inserción 
+                if ($stmt->rowCount() > 0 && !empty($nombreArchivo)) {
+                    $categoriaPath = 'Productos/' . $categoria;
+                    // Mover el archivo a la carpeta correspondiente
+                    $sourcePath = $archivo['tmp_name'];
+                    $destinationPath ='../src/assets/'. $categoriaPath . '/' . $nombreArchivo;
+                    move_uploaded_file($sourcePath, $destinationPath);
+                    if (move_uploaded_file($sourcePath, $destinationPath)) {
+                        error_log('Archivo movido exitosamente: ' . $destinationPath);
+                    } else {
+                        error_log('Error al mover el archivo.');
+                        http_response_code(500);
+                        echo json_encode(['error' => 'Error al mover el archivo.']);
+                        exit();
+                    }
+                }
+                echo json_encode(['message' => 'Producto agregado exitosamente']);
+            } else {
+                http_response_code(400);
+                echo json_encode(['error' => 'No se proporcionó el archivo.']);
+            }
         } catch (Exception $e) {
             http_response_code(500);
-            echo json_encode(['error' => $e->getMessage()]);
+            echo json_encode(['error' => 'Error interno: ' . $e->getMessage()]);
         }
         exit();
 

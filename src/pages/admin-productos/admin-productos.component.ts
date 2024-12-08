@@ -7,6 +7,7 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { ProductoService } from '../../core/servicios/productos/serv-productos';
 import { FormsModule } from '@angular/forms';
+import { json } from 'express';
 
 @Component({
   selector: 'app-admin-productos',
@@ -52,6 +53,7 @@ export class AdminProductosComponent implements OnInit {
   //gestion de imagenes
   getProductoFotoUrl(producto: Producto): string {
     return `../../assets/Productos/${producto.foto_producto}`;
+   
   }
   // fltrador de productos segun categoria
   filtrarArticulos(event: Event) {
@@ -91,16 +93,22 @@ export class AdminProductosComponent implements OnInit {
   // manejar el cambio en el input de archivos
   onFileChange(event: any): void {
     this.imagenes = event.target.files;
+    if (this.imagenes) {
+      }
   }
 
   agregarProducto(): void {
     if (this.imagenes && this.imagenes.length > 0) {
-      const productoData = {
-        ...this.nuevoProducto,
-        foto_producto: this.imagenes[0].name,
-      };
-
-      this.adminProductosService.agregarProducto(productoData).subscribe(
+      const formData = new FormData();
+      formData.append('file', this.imagenes[0]);
+      formData.append('marca_producto', this.nuevoProducto.marca_producto);
+      formData.append('precio', this.nuevoProducto.precio.toString());
+      formData.append( 'id_categoria',this.nuevoProducto.id_categoria.toString());
+      formData.append('stock', this.nuevoProducto.stock.toString());
+      formData.append('descripcion', this.nuevoProducto.descripcion);
+      formData.append('nombreArchivo', this.imagenes[0].name);
+        
+      this.adminProductosService.agregarProducto(formData).subscribe(
         (response) => {
           console.log('Producto creado es:', JSON.stringify(response));
           this.actualizarFiltroArticulos();
