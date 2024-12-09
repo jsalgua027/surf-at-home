@@ -14,7 +14,7 @@ export class AdminProductosComponentService {
   private productoSeleccionado: BehaviorSubject<Producto |null> = new BehaviorSubject<Producto | null>(null);
 
   private apiUrl ='http://localhost/Proyectos/surf-at-home/api/get_products.php';
-  private apiProd= 'http://localhost/tiendaSurf/api/get_users.php';
+  private apiProd= 'http://localhost/surf-at-home/api/get_users.php';
 
   private http = inject(HttpClient);
 

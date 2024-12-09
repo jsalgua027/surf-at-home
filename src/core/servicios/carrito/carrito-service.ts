@@ -9,7 +9,7 @@ import { EstadoPedido } from '../../enums/estado-pedido';
   providedIn: 'root',
 })
 export class CarritoService {
-  private apiProd= 'http://localhost/tiendaSurf/api/get_users.php';
+  private apiProd= 'http://localhost/surf-at-home/api/get_users.php';
   private apiUrl = 'http://localhost/Proyectos/surf-at-home/api/get_orders.php'; 
   private http = inject(HttpClient);
 
