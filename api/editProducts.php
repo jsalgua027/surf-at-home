@@ -16,6 +16,15 @@ try {
     die('Error al conectar con la base de datos: ' . $e->getMessage());
 }
 
+// Función para generar la ruta de la imagen del producto
+function generarRutaImagen($categoria, $nombreArchivo)
+{
+    return  $categoria . '/' . $nombreArchivo;
+}
+
+
+
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
         $data = $_POST;
@@ -38,19 +47,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bindParam(':stock', $data['stock']);
         $stmt->bindParam(':descripcion', $data['descripcion']);
         $stmt->bindParam(':id_producto', $data['id_producto']);
-        $stmt->execute(); // Manejar la actualización de la imagen si se ha enviado una
+        $stmt->execute(); 
+        // Manejar la actualización de la imagen si se ha enviado una
         if (isset($files['file']) && !empty($files['file']['tmp_name'])) {
             $archivo = $files['file'];
             $nombreArchivo = $archivo['name'];
             $sourcePath = $archivo['tmp_name'];
             $categoria = $data['id_categoria'];
-            $rutaImagen = generarRutaImagen($categoria, $nombreArchivo);
-            $destinationPath = 'Productos/' . $rutaImagen; // Crear la carpeta si no existe
             $categoriaPath = 'Productos/' . $categoria;
-            if (!is_dir($categoriaPath)) {
-                mkdir($categoriaPath, 0777, true); // Crear directorios si no existen
-            }
-            if (move_uploaded_file($sourcePath, $destinationPath)) { // Actualizar la ruta de la imagen en la base de datos
+            $rutaImagen = generarRutaImagen($categoria, $nombreArchivo);
+            $destinationPath = '../src/assets/' . $categoriaPath . '/' . $nombreArchivo;
+           
+             move_uploaded_file($sourcePath, $destinationPath);
+            if (move_uploaded_file($sourcePath, $destinationPath)) { 
                 $query = 'UPDATE producto SET foto_producto = :foto_producto WHERE id_producto = :id_producto';
                 $stmt = $conn->prepare($query);
                 $stmt->bindParam(':foto_producto', $rutaImagen);

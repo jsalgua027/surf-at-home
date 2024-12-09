@@ -25,16 +25,13 @@ export class AdminEditarProductosComponent {
 
   ngOnInit(): void {
     this.idProducto = this.router.snapshot.paramMap.get('id')!; // recojo de la ruta el id
-    console.log('ID del producto a editar: ', this.idProducto);
+   // console.log('ID del producto a editar: ', this.idProducto);
     this.adminProductsService
       .obtenerProductoSeleccionado()
       .subscribe((producto) => {
         if (producto && producto.id_producto.toString() === this.idProducto) {
           this.producto = producto;
-          console.log(
-            'el producto que te traes del admin-protuc es:' +
-              JSON.stringify(producto, null, 2)
-          );
+          //console.log('el producto que te traes del admin-protuc es:' +JSON.stringify(producto, null, 2));
         } else {
           console.error('Producto no encontrado o ID no coincide.');
         }
@@ -48,16 +45,10 @@ export class AdminEditarProductosComponent {
   guardarCambios() {
     if (this.producto) {
       // Actualizar manualmente los valores
-      const marcaInput = (document.getElementById('marca') as HTMLInputElement)
-        .value;
-      const descripcionInput = (
-        document.getElementById('descripcion') as HTMLInputElement
-      ).value;
-      const precioInput = +(
-        document.getElementById('precio') as HTMLInputElement
-      ).value;
-      const stockInput = +(document.getElementById('stock') as HTMLInputElement)
-        .value;
+      const marcaInput = (document.getElementById('marca') as HTMLInputElement).value;
+      const descripcionInput = (document.getElementById('descripcion') as HTMLInputElement).value;
+      const precioInput = +(document.getElementById('precio') as HTMLInputElement).value;
+      const stockInput = +(document.getElementById('stock') as HTMLInputElement).value;
       this.producto.marca_producto = marcaInput;
       this.producto.descripcion = descripcionInput;
       this.producto.precio = precioInput;
@@ -71,11 +62,13 @@ export class AdminEditarProductosComponent {
       formData.append('stock', this.producto.stock.toString());
       formData.append('descripcion', this.producto.descripcion);
 
+      
+      if (this.imagenes && this.imagenes.length > 0) {
+         formData.append('file', this.imagenes[0]); 
+        }
+
       //LLamo al servicio de admin-editar-produtos
-      const archivo = this.imagenes ? this.imagenes[0] : undefined;
-      this.editarProductosService
-        .actualizarProducto(formData)
-        .subscribe(
+      this.editarProductosService.actualizarProducto(formData).subscribe(
           (response) => {
             console.log('Producto actualizado:', response);
           },
