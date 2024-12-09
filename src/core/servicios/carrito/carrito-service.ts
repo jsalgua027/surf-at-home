@@ -9,8 +9,9 @@ import { EstadoPedido } from '../../enums/estado-pedido';
   providedIn: 'root',
 })
 export class CarritoService {
-    private apiUrl = 'http://localhost/Proyectos/surf-at-home/api/get_orders.php'; // Asegúrate de actualizar esta URL según sea necesario
-     private http = inject(HttpClient);
+  private apiProd= 'http://localhost/tiendaSurf/api/get_users.php';
+  private apiUrl = 'http://localhost/Proyectos/surf-at-home/api/get_orders.php'; 
+  private http = inject(HttpClient);
 
   private carrito: { producto: Producto; cantidad: number }[] = [];
   private carritoSubject: BehaviorSubject<
@@ -34,7 +35,7 @@ export class CarritoService {
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
     };
-    return this.http.post<any>(this.apiUrl, pedido, httpOptions);
+    return this.http.post<any>(this.apiProd, pedido, httpOptions);
   }
 
   /***GESTIÓN DEL CARRITO A NIVEL FRONT */

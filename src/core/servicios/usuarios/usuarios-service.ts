@@ -6,6 +6,7 @@ import { Usuario } from '../../usuario/usuario';
 
 @Injectable({ providedIn: 'root' })
 export class UsersService {
+  private apiProd= 'http://localhost/tiendaSurf/api/get_users.php';
   private apiUrl = 'http://localhost/Proyectos/surf-at-home/api/get_users.php';
   private http = inject(HttpClient);
   private httpOptions = {
@@ -21,7 +22,7 @@ export class UsersService {
       email: usuario.email,
       password: usuario.password,
     };
-    return this.http.post<any>(this.apiUrl, body).pipe(
+    return this.http.post<any>(this.apiProd, body).pipe(
       map((response) => {
         const user: Usuario = {
           id_usuario: response.id_usuario,
@@ -50,7 +51,7 @@ export class UsersService {
   }): Observable<any> {
     const body = { action: 'createUser', ...usuario };
     return this.http
-      .post<any>(this.apiUrl, body, this.httpOptions)
+      .post<any>(this.apiProd, body, this.httpOptions)
       .pipe(catchError(this.handleError<any>('createUser')));
   }
 

@@ -8,6 +8,7 @@ import { Usuario } from '../../usuario/usuario';
   providedIn: 'root',
 })
 export class AdminUsuariosService {
+  private apiProd= 'http://localhost/tiendaSurf/api/get_users.php';
   private apiUrl = 'http://localhost/Proyectos/surf-at-home/api/get_users.php';
   private http = inject(HttpClient);
   private usuariosSubject: BehaviorSubject<Usuario[]> = new BehaviorSubject<Usuario[]>([]);
@@ -20,7 +21,7 @@ export class AdminUsuariosService {
     };
     const body = { action: 'getUsers' }; // el cuerpo con el action adecuado para que entre en el case que quiero
 
-    this.http.post<Usuario[]>(this.apiUrl, body, httpOptions).subscribe(
+    this.http.post<Usuario[]>(this.apiProd, body, httpOptions).subscribe(
       (usuarios) => {
         this.usuariosSubject.next(usuarios);
       },
@@ -42,7 +43,7 @@ export class AdminUsuariosService {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
     };
     const body = { action: 'deleteUser', id_usuario }; // el cuerpo con el action adecuado y el id del usuario
-    return this.http.post<any>(this.apiUrl, body, httpOptions).pipe(
+    return this.http.post<any>(this.apiProd, body, httpOptions).pipe(
       catchError((error) => {
         console.error('Error al borrar el usuario:', error);
         return throwError(error);

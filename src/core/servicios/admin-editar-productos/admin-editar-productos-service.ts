@@ -9,13 +9,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root',
 })
 export class AdminEditarProductosService {
-  private apiUrl =
-    'http://localhost/Proyectos/surf-at-home/api/editProducts.php';
+  private apiUrl = 'http://localhost/Proyectos/surf-at-home/api/editProducts.php';
+  private apiProd= 'http://localhost/tiendaSurf/api/get_users.php';
+
   private http = inject(HttpClient);
 
   actualizarProducto(productoData: FormData): Observable<any> {
   
-    return this.http.post<any>(this.apiUrl, productoData).pipe(
+    return this.http.post<any>(this.apiProd, productoData).pipe(
       tap((response) => {
         console.log('Producto actualizado service:', response);
       }),

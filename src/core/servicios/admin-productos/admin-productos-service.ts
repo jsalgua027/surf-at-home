@@ -13,8 +13,9 @@ export class AdminProductosComponentService {
   private productosSubject: BehaviorSubject<Producto[]> = new BehaviorSubject<Producto[]>([]);
   private productoSeleccionado: BehaviorSubject<Producto |null> = new BehaviorSubject<Producto | null>(null);
 
-  private apiUrl =
-    'http://localhost/Proyectos/surf-at-home/api/get_products.php';
+  private apiUrl ='http://localhost/Proyectos/surf-at-home/api/get_products.php';
+  private apiProd= 'http://localhost/tiendaSurf/api/get_users.php';
+
   private http = inject(HttpClient);
 
   constructor(private productoService: ProductoService) { }
@@ -41,7 +42,7 @@ export class AdminProductosComponentService {
       'el dato que recibe el servicio agregarProcuto es:' +
       JSON.stringify(productoData)
     );
-    return this.http.post<any>(this.apiUrl, productoData).pipe(
+    return this.http.post<any>(this.apiProd, productoData).pipe(
       tap((response) => {
         const productosActuales = this.productosSubject.value;
         const nuevoProducto = {
@@ -67,7 +68,7 @@ export class AdminProductosComponentService {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
     };
     return this.http
-      .delete<any>(`${this.apiUrl}?id_producto=${id_producto}`, httpOptions)
+      .delete<any>(`${this.apiProd}?id_producto=${id_producto}`, httpOptions)
       .pipe(
         tap(() => {
           const idProductoString = id_producto.toString();

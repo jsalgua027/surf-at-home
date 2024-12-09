@@ -7,6 +7,7 @@ import { catchError, map } from 'rxjs/operators';
 @Injectable({ providedIn: 'root' })
 export class ProductoService {
   private apiUrl = 'http://localhost/Proyectos/surf-at-home/api/get_products.php';
+  private apiProd= 'http://localhost/tiendaSurf/api/get_users.php';
   private http = inject(HttpClient);
 
   constructor() {}
@@ -34,7 +35,7 @@ export class ProductoService {
   // Obtener todos los productos
   getAllProducts(): Observable<any[]> {
     return this.http
-      .get<any[]>(this.apiUrl)
+      .get<any[]>(this.apiProd)
       .pipe(catchError(this.handleError<any[]>('getAllProducts', [])));
   }
   // Manejo de errores
@@ -47,7 +48,7 @@ export class ProductoService {
 
   // Obtener productos por categoría
   getProductosPorCategoriaApi(idCategoria: number): Observable<Producto[]> {
-    const url = `${this.apiUrl}?categoria=${idCategoria}`;
+    const url = `${this.apiProd}?categoria=${idCategoria}`;
     return this.http
       .get<Producto[]>(url)
       .pipe(
