@@ -10,25 +10,20 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class AdminEditarProductosService {
   private apiUrl =
-    'http://localhost/Proyectos/surf-at-home/api/get_products.php';
+    'http://localhost/Proyectos/surf-at-home/api/editProducts.php';
   private http = inject(HttpClient);
 
   actualizarProducto(productoData: FormData): Observable<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-    };
-    console.log(
-      'el dato que recibe el servicio actualizarProducto es:',
-      productoData
-    );
-    return this.http.put<any>(this.apiUrl, productoData).pipe(
+  
+    return this.http.post<any>(this.apiUrl, productoData).pipe(
       tap((response) => {
-        console.log('Producto actualizado:', response);
+        console.log('Producto actualizado service:', response);
       }),
       catchError((error) => {
-        console.error('Error al actualizar el producto:', error);
+        console.error('Error al actualizar el producto (desde el service):', error);
         return throwError(error);
       })
     );
   }
 }
+ 

@@ -32,6 +32,8 @@ function generarRutaImagen($categoria, $nombreArchivo)
     return  $categoria . '/' . $nombreArchivo;
 }
 
+
+
 // Manejar diferentes métodos HTTP
 switch ($method) {
     case 'GET':
@@ -104,70 +106,7 @@ switch ($method) {
         }
         exit();
 
-    case 'PUT':
-        try {
-            // Manejar datos enviados a través de `multipart/form-data`
-            if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'PUT') {
-            // parse_str(file_get_contents("php://input"), $data);
-             $data = $_POST;
-                error_log('Datos recibidos en $_POST  API: ' . print_r($data, true));
-                error_log('Archivos recibidos en $_FILES  API : ' . print_r($_FILES, true));
-                if (!isset($data['id_producto'])) {
-                    http_response_code(400);
-                    echo json_encode(['error' => 'ID de producto no proporcionado  API ']);
-                    exit();
-                }
-            }
-
-            $query = 'UPDATE producto SET 
-                      marca_producto = :marca_producto, 
-                      precio = :precio, 
-                      id_categoria = :id_categoria, 
-                      stock = :stock, 
-                      descripcion = :descripcion 
-                      WHERE id_producto = :id_producto';
-            $stmt = $conn->prepare($query);
-            $stmt->bindParam(':marca_producto', $data['marca_producto']);
-            $stmt->bindParam(':precio', $data['precio']);
-            $stmt->bindParam(':id_categoria', $data['id_categoria']);
-            $stmt->bindParam(':stock', $data['stock']);
-            $stmt->bindParam(':descripcion', $data['descripcion']);
-            $stmt->bindParam(':id_producto', $data['id_producto']);
-            $stmt->execute();
-
-            /***
-             *   if (isset($_FILES['file'])) {
-                $archivo = $_FILES['file'];
-                $nombreArchivo = $archivo['name'];
-                $sourcePath = $archivo['tmp_name'];
-                // Generar la ruta de la imagen 
-                $categoria = $data['id_categoria'];
-                $rutaImagen = generarRutaImagen($categoria, $nombreArchivo);
-                $destinationPath = '../src/assets/' . $categoriaPath . '/' . $nombreArchivo;
-                move_uploaded_file($sourcePath, $destinationPath);
-            }
-            if (move_uploaded_file($sourcePath, $destinationPath)) {
-                // Actualizar la ruta de la imagen en la base de datos
-                $query = 'UPDATE producto SET foto_producto = :foto_producto WHERE id_producto = :id_producto';
-                $stmt = $conn->prepare($query);
-                $stmt->bindParam(':foto_producto', $rutaImagen);
-                $stmt->bindParam(':id_producto', $data['id_producto']);
-                $stmt->execute();
-                error_log('Archivo movido exitosamente: ' . $destinationPath);
-            } else {
-                error_log('Error al mover el archivo.');
-                http_response_code(500);
-                echo json_encode(['error' => 'Error al mover el archivo.']);
-                exit();
-            }
-             */
-
-            echo json_encode(['message' => 'Producto actualizado exitosamente MENSAJE API']);
-        } catch (Exception $e) {
-            http_response_code(500);
-            echo json_encode(['error' => $e->getMessage()]);
-        }
-
+   
 
     case 'DELETE':
         try {
