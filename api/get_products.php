@@ -84,8 +84,8 @@ switch ($method) {
                     $categoriaPath = 'Productos/' . $categoria;
                     // Mover el archivo a la carpeta correspondiente
                     $sourcePath = $archivo['tmp_name'];
-                    $destinationPath = 'assets/' . $categoriaPath . '/' . $nombreArchivo;
-                    move_uploaded_file($sourcePath, $destinationPath);
+                    $destinationPath = '../assets/' . $categoriaPath . '/' . $nombreArchivo;
+                
                     if (move_uploaded_file($sourcePath, $destinationPath)) {
                         error_log('Archivo movido exitosamente: ' . $destinationPath);
                     } else {
