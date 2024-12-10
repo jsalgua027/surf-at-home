@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $categoria = $data['id_categoria'];
             $categoriaPath = 'Productos/' . $categoria;
             $rutaImagen = generarRutaImagen($categoria, $nombreArchivo);
-            $destinationPath = '../src/assets/' . $categoriaPath . '/' . $nombreArchivo;
+            $destinationPath = 'assets/' . $categoriaPath . '/' . $nombreArchivo;
            
              move_uploaded_file($sourcePath, $destinationPath);
             if (move_uploaded_file($sourcePath, $destinationPath)) { 
