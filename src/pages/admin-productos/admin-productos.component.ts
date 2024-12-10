@@ -52,7 +52,7 @@ export class AdminProductosComponent implements OnInit {
 
   //gestion de imagenes
   getProductoFotoUrl(producto: Producto): string {
-    return `../../assets/Productos/${producto.foto_producto}`;
+    return `assets/Productos/${producto.foto_producto}`;
    
   }
   // fltrador de productos segun categoria

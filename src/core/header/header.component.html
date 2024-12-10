@@ -1,7 +1,7 @@
 <div *ngIf="showAlert" class=" custom-alert alert alert-warning" role="alert"> {{ alertMessage }} </div>
 <div *ngIf="showAlert2" class=" custom-alert2 alert alert-warning" role="alert"> {{ alertMessage2 }} </div>
- 
- <header>
+
+<header>
 
     <ul>
         <li>
@@ -16,18 +16,18 @@
         <li className="login">
             <button (click)="irALogin()">
 
-                <img src="../../assets/icons/Login.svg" alt="Login" />
+                <img src="assets/icons/Login.svg" alt="Login" />
 
             </button>
         </li>
         <li className="carro">
             <button (click)="openEnd(carrito)">
-                <img src="../../assets/icons/Carro.svg" alt="Carro" />
+                <img src="assets/icons/Carro.svg" alt="Carro" />
             </button>
         </li>
         <li className="loginOut">
             <button (click)="logout()">
-                <img src="/assets/icons/LogOut.svg" alt="logout" />
+                <img src="assets/icons/LogOut.svg" alt="logout" />
             </button>
         </li>
     </ul>
@@ -52,7 +52,7 @@
                         (click)="offcanvas.dismiss('Cross click'); irAProductos(4)">NEOPRENOS</button></li>
             </ul>
             <div className="logo-menu">
-                <img class="logo" src="../../assets/logos/Logo1.png" alt="Logo de la tienda del menú" />
+                <img class="logo" src="assets/logos/Logo1.png" alt="Logo de la tienda del menú" />
             </div>
 
         </div>
@@ -79,10 +79,10 @@
                 </div>
                 <div class="card-botones-cantidad">
                     <button class="btn btn-primary" (click)="aumentarCantidad(item.producto)"><img
-                            src="../../assets/icons/add-outline.svg" alt=""></button>
+                            src="assets/icons/add-outline.svg" alt=""></button>
                     <span>{{ item.cantidad }}</span>
                     <button class="btn btn-danger" (click)="disminuirCantidad(item.producto)"><img
-                            src="../../assets/icons/remove-outline.svg" alt=""></button>
+                            src="assets/icons/remove-outline.svg" alt=""></button>
 
                 </div>
 
@@ -92,7 +92,7 @@
                     <h4>Total: {{ totalCompra | currency:'EUR' }}</h4>
                 </div>
                 <button type="button" class="btn btn-outline-secondary"
-                    (click)="offcanvas.close('Close click'); hacePedido();" >Confirmar Pedido</button>
+                    (click)="offcanvas.close('Close click'); hacePedido();">Confirmar Pedido</button>
             </div>
         </div>
 

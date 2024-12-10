@@ -10,7 +10,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class AdminEditarProductosService {
   private apiUrl = 'http://localhost/Proyectos/surf-at-home/api/editProducts.php';
-  private apiProd= 'http://localhost/surf-at-home/api/get_users.php';
+  private apiProd= 'http://localhost/surf-at-home/api/editProducts.php';
 
   private http = inject(HttpClient);
 

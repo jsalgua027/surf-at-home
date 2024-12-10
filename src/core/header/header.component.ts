@@ -90,7 +90,7 @@ export class HeaderComponent implements OnInit {
   }
 
   getProductoFotoUrl(producto: Producto): string {
-    return `../../assets/Productos/${producto.foto_producto}`;
+    return `assets/Productos/${producto.foto_producto}`;
   }
 
   /**
