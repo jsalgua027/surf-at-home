@@ -153,6 +153,7 @@ export class AdminProductosComponent implements OnInit {
           },
           (error) => {
             console.error('Error al eliminar el producto:', error);
+            modalRef.close();
           }
         );
       this.productoParaEliminar = null;

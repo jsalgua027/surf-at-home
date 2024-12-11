@@ -70,17 +70,21 @@ export class AdminProductosComponentService {
     return this.http
       .delete<any>(`${this.apiProd}?id_producto=${id_producto}`, httpOptions)
       .pipe(
+        
         tap(() => {
-          const idProductoString = id_producto.toString();
-          const productosActuales = this.productosSubject.value.filter(
-            (producto) => producto.id_producto.toString() !== idProductoString
-          );
+          
+          const productosActuales = this.productosSubject.value.filter((producto) => {
+            console.log(`Comparing product id: ${producto.id_producto} with id_producto: ${id_producto}`);
+            return Number(producto.id_producto) !== id_producto;
+          });
+          
           this.productosSubject.next(productosActuales);
         }),
         catchError((error) => {
           console.error('Error al eliminar el producto:', error);
           return throwError(error);
         })
+        
       );
   }
 
