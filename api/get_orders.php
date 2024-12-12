@@ -8,8 +8,8 @@ header('Content-Type: application/json; charset=utf-8');
 // Conexión a la base de datos
 $host = 'localhost';
 $dbname = 'bd_surfathome';
-$username = 'jose';
-$password = 'josefa';
+$username = 'root'; 
+$password = ''; 
 
 try {
     $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
