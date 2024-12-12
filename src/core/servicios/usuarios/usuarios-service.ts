@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
 import { Usuario } from '../../usuario/usuario';
@@ -38,7 +38,10 @@ export class UsersService {
         //  console.log('Usuario obtenido y almacenado en objeto:', JSON.stringify(user));
         return user;
       }),
-      catchError(this.handleError<any>('login'))
+      catchError((error) => {
+         return throwError(() => new Error('Login failed')); 
+
+      })
     );
   }
 

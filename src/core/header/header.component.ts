@@ -48,17 +48,14 @@ export class HeaderComponent implements OnInit {
     this.usersService.currentUser$.subscribe((user) => {
       this.currentUser = user; // Actualiza currentUser
       this.loggedIn = !!user;
-      console.log('Usuario suscrito en HeaderComponent:', this.currentUser);
+     // console.log('Usuario suscrito en HeaderComponent:', this.currentUser);
     });
   }
   /*****GESTIÓN DEL PEDIDO***/
 
   hacePedido() {
     if (this.loggedIn && this.currentUser) {
-      // Mostrar los datos del carrito en la consola
-      // console.log('Pedido realizado por el usuario:', this.currentUser);
-      // console.log('Productos en el carrito:', this.productosCarrito);
-      // console.log('Total de la compra:', this.totalCompra);
+   
       // Aquí puedes implementar la llamada a la API para realizar el pedido
       this.carritoService.generarPedido(this.currentUser.id_usuario).subscribe(
         (response) => {

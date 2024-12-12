@@ -12,7 +12,7 @@ export class ProductoService {
 
   constructor() {}
  
-
+//buscador de productos
   searchProducts(term: string): Observable<Producto[]> {
     return this.getAllProducts().pipe(
       map((productos) =>

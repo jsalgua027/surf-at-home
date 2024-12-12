@@ -1,208 +1,188 @@
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: white;
-    padding: 10px;
-    border-bottom: 5px solid #02799A;
-    height: 80px
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  padding: 10px;
+  border-bottom: 5px solid #02799a;
+  height: 80px;
 }
 
 ul {
-    display: flex;
-    flex-direction: row;
-    /* Asegura el alineamiento horizontal */
-    align-items: center;
-    justify-content: space-between;
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
 }
-
-
 
 .hamburger,
 .login,
 .carro,
 .loginOut {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: none;
-    border: none;
-    font-size: 25px;
-    color: #02799A;
-
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  font-size: 25px;
+  color: #02799a;
 }
 
-/*Ajusto el tamaño de los logos*/
+/*tamaño de los logos*/
 .login img,
 .carro img,
 .loginOut img {
-    width: 30px;
-    height: auto;
+  width: 30px;
+  height: auto;
 }
 
 .logo-header {
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: auto;
-    color: #02799A;
-    font-size: 20px;
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  color: #02799a;
+  font-size: 20px;
 }
 
-
 .logo-header img {
-    max-width: 100%;
-    height: auto;
+  max-width: 100%;
+  height: auto;
 }
 
-/* Ajusta la imagen del logo para que se mantenga alineada */
+/* la imagen del logo  */
 .logo-header img {
-    width: 100px;
-    /* Ajusta este valor según necesites */
-    height: auto;
+  width: 100px;
+  height: auto;
 }
 
 ul li button {
-    background: none;
-    border: none;
-    color: #02799A;
-    font-size: 24px;
+  background: none;
+  border: none;
+  color: #02799a;
+  font-size: 24px;
 }
 
-
-
-
 .letras-side {
-    color: #02799A;
-    margin-bottom: 10px;
+  color: #02799a;
+  margin-bottom: 10px;
 }
 
 .boton-side {
-    display: block;
-    /* Asegurar que el botón ocupe todo el ancho disponible */
-    width: 100%;
-    text-align: left;
-    /* Alinear el texto a la izquierda */
-    padding: 10px;
-    /* Añadir padding para mejor apariencia */
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 10px;
 }
 
 .logo-menu {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
+   margin-top: 50px;
 
-    /* Centrar el logo si es necesario */
-    margin-top: 50px;
-    /* Ajusta el margen superior para separar el logo de los elementos de la lista */
 }
 
 .logo {
-    width: 400px;
-    /* Ajusta el ancho del logo */
-    height: 400px;
-    /* Mantén la proporción del logo */
-    max-width: 100%;
-    /* Asegura que el logo no exceda el tamaño del contenedor */
+  width: 400px;
+  height: 400px;
+   max-width: 100%;
+
 }
 
 /*CARRITO DE  COMPRAS*/
 
 .card-contenedor {
-    border: 1px solid #02799A;
-    border-radius: 5px;
-    margin-bottom: 5px;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    width: 90%;
-    box-shadow: 5px 1px 5px rgba(0, 0, 0, 0.2);
+  border: 1px solid #02799a;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 90%;
+  box-shadow: 5px 1px 5px rgba(0, 0, 0, 0.2);
 }
 
 .card-body {
-    display: flex;
-    width: 100%;
-
+  display: flex;
+  width: 100%;
 }
-.card-img{
-   margin-right: 5px;
-    width: 300px;
-    height: auto;
+.card-img {
+  margin-right: 5px;
+  width: 300px;
+  height: auto;
 }
 
 .card-botones-cantidad {
-    display: flex;
-    justify-content: center;
-    margin: 5px;
-    width: 60%;
- 
+  display: flex;
+  justify-content: center;
+  margin: 5px;
+  width: 60%;
 }
 
-.card-botones-cantidad>button {
-    padding: 5px;
-    width: 20%;
-  
+.card-botones-cantidad > button {
+  padding: 5px;
+  width: 20%;
 }
 
-.card-botones-cantidad>span {
-    text-align: center;
-    width: 50%
+.card-botones-cantidad > span {
+  text-align: center;
+  width: 50%;
 }
 
 /*ALERTA*/
 .custom-alert {
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 9999; // Asegura que la alerta esté encima de otros elementos
-    background-color: rgb(182, 56, 56); // Cambia el color de fondo
-    color: #000; // Cambia el color del texto
-    padding: 20px;
-    font-size: 18px;
-    border-radius: 5px;
-    width: auto;
-    max-width: 90%;
-    text-align: center;
-    height: 150px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .alert-warning {
-    background-color: rgb(164, 43, 43); // Color de fondo
-    color: white; // Color del texto
-    font-weight: bold; // Hacer el texto bold
-  }
-  
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999; 
+  background-color: rgb(182, 56, 56); 
+  color: #000; 
+  padding: 20px;
+  font-size: 18px;
+  border-radius: 5px;
+  width: auto;
+  max-width: 90%;
+  text-align: center;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-  .custom-alert2 {
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 9999; // Asegura que la alerta esté encima de otros elementos
-    background-color:rgb(119, 198, 229); // Cambia el color de fondo
-    color: #000; // Cambia el color del texto
-    padding: 20px;
-    font-size: 18px;
-    border-radius: 5px;
-    width: auto;
-    max-width: 90%;
-    text-align: center;
-    height: 150px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .alert-warning2 {
-    background-color: rgb(119, 198, 229); // Color de fondo
-    color: black; // Color del texto
-    font-weight: bold; // Hacer el texto bold
-  }
+.alert-warning {
+  background-color: rgb(164, 43, 43);
+  color: white;
+  font-weight: bold; 
+}
+
+.custom-alert2 {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999; 
+  background-color: rgb(119, 198, 229); 
+  color: #000; 
+  padding: 20px;
+  font-size: 18px;
+  border-radius: 5px;
+  width: auto;
+  max-width: 90%;
+  text-align: center;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.alert-warning2 {
+  background-color: rgb(119, 198, 229); 
+  color: black; 
+  font-weight: bold; 
+}

@@ -7,7 +7,6 @@ import {
   ReactiveFormsModule,
   FormsModule,
 } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { UsersService } from '../../core/servicios/usuarios/usuarios-service';
 @Component({

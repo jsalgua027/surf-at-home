@@ -1,54 +1,47 @@
 .form-cuenta {
-    background-color: #f8f9fa;
-    /* Color de fondo, por ejemplo */
-    padding: 5px;
-    /* Añade espacio interno */
-    border: 1px solid #ced4da;
-    /* Añade borde */
-    width: 50%;
-    margin: auto;
-    /* Centro vertical y horizontal */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    /* Centro vertical de los elementos */
-    height: 70vh;
-    /* Ocupa todo el alto disponible */
-    box-shadow: 0 25px 40px rgba(0, 0, 0, 0.1);
-    /* Añade sombra */
+  background-color: #f8f9fa;
+  padding: 5px;
+  border: 1px solid #ced4da;
+  width: 50%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 70vh;
+  box-shadow: 0 25px 40px rgba(0, 0, 0, 0.1);
 }
 
 .form-cuenta form {
-    width: 100%;
-    /* Asegúrate de que el formulario ocupe todo el ancho disponible */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* Centro horizontal de los elementos dentro del formulario */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .form-cuenta form h1 {
-    margin-bottom: 15px;
-    /* Espacio abajo del título */
-
+  margin-bottom: 15px;
 }
 
 .form-cuenta form .form-group {
-    width: 100%;
-    /* Asegúrate de que cada grupo de formulario ocupe todo el ancho disponible */
-    margin-bottom: 15px;
-    /* Espacio entre los grupos de formulario */
+  width: 100%;
+  margin-bottom: 15px;
 }
 
 .form-cuenta form .btn {
-    margin-top: 10px;
-    /* Espacio arriba del botón */
+  margin-top: 10px;
 }
 
-.black-button {
-    background-color: black;
-    border-color: black;
-    color: white;
-    margin-top: 10px;
-
+/* Estilo del botón cuando el formulario es inválido */
+.btn.btn-secondary.black-button[disabled] {
+  background-color: red;
+  border-color: red;
+  cursor: not-allowed;
+  margin-top: 10px;
+}
+/* Estilo del botón cuando el formulario es válido */
+.btn.btn-secondary.black-button:not([disabled]) {
+  background-color: black;
+  border-color: black;
+  cursor: pointer;
+  margin-top: 10px;
 }

@@ -55,3 +55,30 @@
     border-color: black;
     color: white;
 }
+
+/******ALERTA*****/
+.custom-alert {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999; // Asegura que la alerta esté encima de otros elementos
+    background-color: rgb(182, 56, 56); // Cambia el color de fondo
+    color: #000; // Cambia el color del texto
+    padding: 20px;
+    font-size: 18px;
+    border-radius: 5px;
+    width: auto;
+    max-width: 90%;
+    text-align: center;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .alert-warning {
+    background-color: rgb(164, 43, 43); // Color de fondo
+    color: white; // Color del texto
+    font-weight: bold; // Hacer el texto bold
+  }

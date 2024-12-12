@@ -19,9 +19,13 @@ export class LoginComponent {
   private router = inject(Router);
   private usuarioService = inject(UsersService);
 
-
+ //variables para recoger el formulario
   email: string = '';
   password: string = '';
+
+//variables para lanzar alerta
+showAlert: boolean = false;
+alertMessage: string | null = null;
 
   constructor() {}
 
@@ -54,6 +58,12 @@ export class LoginComponent {
       },
       (error: any) => {
         // Manejar los errores aquí
+        this.alertMessage = 'DATOS INTRODUCIDOS ERRONEOS';
+        this.showAlert = true;
+        setTimeout(() => {
+          this.showAlert = false;
+          this.alertMessage = null;
+          }, 2000);
         console.error('Error en el login', error);
       }
     );

@@ -35,7 +35,7 @@
       <input type="text" id="telefono" formControlName="telefono" class="form-control" />
       <div *ngIf="telefono?.invalid && (telefono?.dirty || telefono?.touched)">
         <small *ngIf="telefono?.errors?.['required']">El teléfono es obligatorio.</small>
-        <small *ngIf="telefono?.errors?.['pattern']">El teléfono debe tener 10 dígitos.</small>
+        <small *ngIf="telefono?.errors?.['pattern']">El teléfono debe tener 10 números exactos.</small>
       </div>
     </div>
     <button type="submit" class="btn btn-secondary black-button" [disabled]="cuentaForm.invalid">Crear Cuenta</button>
