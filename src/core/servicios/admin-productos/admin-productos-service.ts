@@ -62,7 +62,7 @@ export class AdminProductosComponentService {
       })
     );
   }
-
+//todo correcto
   eliminarProducto(id_producto: number): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
