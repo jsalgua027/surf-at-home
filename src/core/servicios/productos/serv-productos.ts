@@ -7,7 +7,7 @@ import { catchError, map } from 'rxjs/operators';
 @Injectable({ providedIn: 'root' })
 export class ProductoService {
   private apiUrl = 'http://localhost/Proyectos/surf-at-home/api/get_products.php';
-  private apiProd= 'http://localhost/surf-at-home/api/get_products.php';
+  private apiProd= 'https://surf-at-home.endinahosting.com/surf-at-home/api/get_products.php';
   private http = inject(HttpClient);
 
   constructor() {}

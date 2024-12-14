@@ -9,7 +9,7 @@ import { PedidoProducto } from '../../pedido-producto/pedido-producto';
   providedIn: 'root',
 })
 export class AdminPedidosComponentService {
-  private apiProd= 'http://localhost/surf-at-home/api/get_orders.php';
+  private apiProd= 'https://surf-at-home.endinahosting.com/surf-at-home/api/get_orders.php';
   private apiUrl = 'http://localhost/Proyectos/surf-at-home/api/get_orders.php'; 
   private http = inject(HttpClient);
   private pedidoSubject: BehaviorSubject<Pedido[]> = new BehaviorSubject<Pedido[]>([]);

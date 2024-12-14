@@ -8,7 +8,7 @@ import { Usuario } from '../../usuario/usuario';
   providedIn: 'root',
 })
 export class AdminUsuariosService {
-  private apiProd= 'http://localhost/surf-at-home/api/get_users.php';
+  private apiProd= 'https://surf-at-home.endinahosting.com/surf-at-home/api/get_users.php';
   private apiUrl = 'http://localhost/Proyectos/surf-at-home/api/get_users.php';
   private http = inject(HttpClient);
   private usuariosSubject: BehaviorSubject<Usuario[]> = new BehaviorSubject<Usuario[]>([]);

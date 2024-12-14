@@ -6,8 +6,9 @@ import { Usuario } from '../../usuario/usuario';
 
 @Injectable({ providedIn: 'root' })
 export class UsersService {
-  private apiProd= 'http://localhost/surf-at-home/api/get_users.php';
+  private apiProd= 'https://surf-at-home.endinahosting.com/surf-at-home/api/get_users.php';
   private apiUrl = 'http://localhost/Proyectos/surf-at-home/api/get_users.php';
+  
   private http = inject(HttpClient);
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
