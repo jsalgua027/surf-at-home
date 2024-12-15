@@ -105,9 +105,7 @@ switch ($method) {
             echo json_encode(['error' => 'Error interno: ' . $e->getMessage()]);
         }
         exit();
-
-   
-
+  
     case 'DELETE':
         try {
             if (isset($_GET['id_producto'])) {

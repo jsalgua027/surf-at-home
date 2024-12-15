@@ -62,13 +62,11 @@ export class AdminProductosComponentService {
       })
     );
   }
-//todo correcto
+
   eliminarProducto(id_producto: number): Observable<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-    };
+   
     return this.http
-      .delete<any>(`${this.apiProd}?id_producto=${id_producto}`, httpOptions)
+      .delete<any>(`${this.apiProd}?id_producto=${id_producto}`)
       .pipe(
         
         tap(() => {
