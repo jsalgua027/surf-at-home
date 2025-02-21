@@ -35,7 +35,7 @@ export class CarritoService {
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
     };
-    return this.http.post<any>(this.apiProd, pedido, httpOptions);
+    return this.http.post<any>(this.apiUrl, pedido, httpOptions);
   }
 
   /***GESTIÓN DEL CARRITO A NIVEL FRONT */

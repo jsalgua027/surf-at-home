@@ -18,7 +18,7 @@ export class AdminPedidosComponentService {
   constructor() {}
 
   getPedidos(): Observable<Pedido[]> {
-    this.http.get<Pedido[]>(`${this.apiProd}`).subscribe(pedidos => {
+    this.http.get<Pedido[]>(`${this.apiUrl}`).subscribe(pedidos => {
        this.pedidoSubject.next(pedidos);
        }, error => { console.error('Error al obtener los pedidos:', error); 
         
@@ -40,7 +40,7 @@ export class AdminPedidosComponentService {
   cambiarEstadoPedido(id_pedido: number): Observable<any> { 
     const body = { id_pedido }; 
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-     return this.http.put<any>(`${this.apiProd}`, body, httpOptions).pipe(
+     return this.http.put<any>(`${this.apiUrl}`, body, httpOptions).pipe(
        catchError(error => { console.error('Error al cambiar el estado del pedido:', error); 
         return throwError(error); }) 
       ); 

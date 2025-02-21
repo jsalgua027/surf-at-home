@@ -23,7 +23,7 @@ export class UsersService {
       email: usuario.email,
       password: usuario.password,
     };
-    return this.http.post<any>(this.apiProd, body).pipe(
+    return this.http.post<any>(this.apiUrl, body).pipe(
       map((response) => {
         const user: Usuario = {
           id_usuario: response.id_usuario,
@@ -55,7 +55,7 @@ export class UsersService {
   }): Observable<any> {
     const body = { action: 'createUser', ...usuario };
     return this.http
-      .post<any>(this.apiProd, body, this.httpOptions)
+      .post<any>(this.apiUrl, body, this.httpOptions)
       .pipe(catchError(this.handleError<any>('createUser')));
   }
 

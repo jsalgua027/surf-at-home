@@ -42,7 +42,7 @@ export class AdminProductosComponentService {
       'el dato que recibe el servicio agregarProcuto es:' +
       JSON.stringify(productoData)
     );
-    return this.http.post<any>(this.apiProd, productoData).pipe(
+    return this.http.post<any>(this.apiUrl, productoData).pipe(
       tap((response) => {
         const productosActuales = this.productosSubject.value;
         const nuevoProducto = {
@@ -66,7 +66,7 @@ export class AdminProductosComponentService {
   eliminarProducto(id_producto: number): Observable<any> {
    
     return this.http
-      .delete<any>(`${this.apiProd}?id_producto=${id_producto}`)
+      .delete<any>(`${this.apiUrl}?id_producto=${id_producto}`)
       .pipe(
         
         tap(() => {

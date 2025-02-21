@@ -35,7 +35,7 @@ export class ProductoService {
   // Obtener todos los productos
   getAllProducts(): Observable<any[]> {
     return this.http
-      .get<any[]>(this.apiProd)
+      .get<any[]>(this.apiUrl)
       .pipe(catchError(this.handleError<any[]>('getAllProducts', [])));
   }
   // Manejo de errores
@@ -48,7 +48,7 @@ export class ProductoService {
 
   // Obtener productos por categoría
   getProductosPorCategoriaApi(idCategoria: number): Observable<Producto[]> {
-    const url = `${this.apiProd}?categoria=${idCategoria}`;
+    const url = `${this.apiUrl}?categoria=${idCategoria}`;
     return this.http
       .get<Producto[]>(url)
       .pipe(

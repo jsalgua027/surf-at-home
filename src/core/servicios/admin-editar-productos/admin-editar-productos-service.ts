@@ -16,7 +16,7 @@ export class AdminEditarProductosService {
 
   actualizarProducto(productoData: FormData): Observable<any> {
   
-    return this.http.post<any>(this.apiProd, productoData).pipe(
+    return this.http.post<any>(this.apiUrl, productoData).pipe(
       tap((response) => {
         console.log('Producto actualizado service:', response);
       }),
